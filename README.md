@@ -1,4 +1,4 @@
-# TradeOS - International AI-Powered Algorithmic Trading Platform
+# TradeOS - AI-Powered Algorithmic Trading Platform
 
 <div align="center">
 
