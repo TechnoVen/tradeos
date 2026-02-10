@@ -1,10 +1,10 @@
-# OpenAlgo Developer Documentation
+# TradeOS Developer Documentation
 
-Welcome to the OpenAlgo Developer Bible - a comprehensive guide for understanding and working with the OpenAlgo algorithmic trading platform.
+Welcome to the TradeOS Developer Bible - a comprehensive guide for understanding and working with the TradeOS algorithmic trading platform.
 
-## What is OpenAlgo?
+## What is TradeOS?
 
-OpenAlgo is a production-ready algorithmic trading platform built with Flask (backend) and React 19 (frontend). It provides a unified API layer across 24+ Indian brokers, enabling seamless integration with TradingView, Amibroker, Excel, Python, and AI agents.
+TradeOS is a production-ready algorithmic trading platform built with Flask (backend) and React 19 (frontend). It provides a unified API layer across 24+ Indian brokers, enabling seamless integration with TradingView, Amibroker, Excel, Python, and AI agents.
 
 ## Documentation Index
 

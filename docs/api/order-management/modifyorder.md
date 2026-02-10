@@ -40,7 +40,7 @@ Custom Domain:  POST https://<your-custom-domain>/api/v1/modifyorder
 
 | Parameter | Description | Mandatory/Optional | Default Value |
 |-----------|-------------|-------------------|---------------|
-| apikey | Your OpenAlgo API key | Mandatory | - |
+| apikey | Your TradeOS API key | Mandatory | - |
 | orderid | Order ID to modify | Mandatory | - |
 | strategy | Strategy identifier | Optional | - |
 | symbol | Trading symbol | Mandatory | - |

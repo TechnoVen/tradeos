@@ -33,7 +33,7 @@ Custom Domain:  POST https://<your-custom-domain>/api/v1/cancelorder
 
 | Parameter | Description | Mandatory/Optional | Default Value |
 |-----------|-------------|-------------------|---------------|
-| apikey | Your OpenAlgo API key | Mandatory | - |
+| apikey | Your TradeOS API key | Mandatory | - |
 | orderid | Order ID to cancel | Mandatory | - |
 | strategy | Strategy identifier | Optional | - |
 

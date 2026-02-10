@@ -139,7 +139,7 @@ def download_firstock_data(output_path):
 
 def process_firstock_nse_data(output_path):
     """
-    Processes the Firstock NSE data (NSE_symbols.csv) to generate OpenAlgo symbols.
+    Processes the Firstock NSE data (NSE_symbols.csv) to generate TradeOS symbols.
     Separates EQ, BE symbols, and Index symbols.
 
     Index symbols are identified by having 0 values in ISIN, TickSize, and FreezeQty columns.
@@ -169,8 +169,8 @@ def process_firstock_nse_data(output_path):
     # Initialize symbol with brsymbol
     df["symbol"] = df["brsymbol"]
 
-    # Apply transformation for OpenAlgo symbols
-    def get_openalgo_symbol(broker_symbol):
+    # Apply transformation for TradeOS symbols
+    def get_tradeos_symbol(broker_symbol):
         if "-EQ" in broker_symbol:
             return broker_symbol.replace("-EQ", "")
         elif "-BE" in broker_symbol:
@@ -179,9 +179,9 @@ def process_firstock_nse_data(output_path):
             return broker_symbol
 
     # Update the symbol column
-    df["symbol"] = df["brsymbol"].apply(get_openalgo_symbol)
+    df["symbol"] = df["brsymbol"].apply(get_tradeos_symbol)
 
-    # Map index symbols to OpenAlgo standard format
+    # Map index symbols to TradeOS standard format
     index_symbol_mapping = {
         "Nifty 50": "NIFTY",
         "Nifty Fin Service": "FINNIFTY",
@@ -242,7 +242,7 @@ def process_firstock_nse_data(output_path):
 
 def process_firstock_nfo_data(output_path):
     """
-    Processes the Firstock NFO data (NFO_symbols.csv) to generate OpenAlgo symbols.
+    Processes the Firstock NFO data (NFO_symbols.csv) to generate TradeOS symbols.
     Handles both futures and options formatting.
     """
     logger.info("Processing Firstock NFO Data")
@@ -342,7 +342,7 @@ def process_firstock_nfo_data(output_path):
 
 def process_firstock_bse_data(output_path):
     """
-    Processes the Firstock BSE data (BSE_symbols.csv) to generate OpenAlgo symbols.
+    Processes the Firstock BSE data (BSE_symbols.csv) to generate TradeOS symbols.
     Ensures that the instrument type is always 'EQ'.
     """
     logger.info("Processing Firstock BSE Data")
@@ -365,12 +365,12 @@ def process_firstock_bse_data(output_path):
     # Initialize symbol with brsymbol
     df["symbol"] = df["brsymbol"]
 
-    # Apply transformation for OpenAlgo symbols (no special logic needed for BSE)
-    def get_openalgo_symbol(broker_symbol):
+    # Apply transformation for TradeOS symbols (no special logic needed for BSE)
+    def get_tradeos_symbol(broker_symbol):
         return broker_symbol
 
     # Update the symbol column
-    df["symbol"] = df["brsymbol"].apply(get_openalgo_symbol)
+    df["symbol"] = df["brsymbol"].apply(get_tradeos_symbol)
 
     # Set Exchange: 'BSE' for all rows
     df["exchange"] = "BSE"
@@ -409,7 +409,7 @@ def process_firstock_bse_data(output_path):
 
 def process_firstock_bfo_data(output_path):
     """
-    Processes the Firstock BFO data (BFO_symbols.csv) to generate OpenAlgo symbols.
+    Processes the Firstock BFO data (BFO_symbols.csv) to generate TradeOS symbols.
     Similar to NFO but for BSE derivatives.
     """
     logger.info("Processing Firstock BFO Data")

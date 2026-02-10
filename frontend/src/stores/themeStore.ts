@@ -172,7 +172,7 @@ export const useThemeStore = create<ThemeStore>()(
       },
     }),
     {
-      name: 'openalgo-theme',
+      name: 'tradeos-theme',
       partialize: (state) => ({
         mode: state.mode,
         color: state.color,

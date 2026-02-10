@@ -1,6 +1,6 @@
 """
-Fyers WebSocket Adapter for OpenAlgo WebSocket Proxy
-Integrates with the OpenAlgo WebSocket proxy system
+Fyers WebSocket Adapter for TradeOS WebSocket Proxy
+Integrates with the TradeOS WebSocket proxy system
 """
 
 import json
@@ -39,7 +39,7 @@ from .fyers_tbt_websocket import FyersTbtWebSocket
 
 
 class FyersWebSocketAdapter(BaseBrokerWebSocketAdapter):
-    """Fyers-specific implementation of the WebSocket adapter for OpenAlgo proxy"""
+    """Fyers-specific implementation of the WebSocket adapter for TradeOS proxy"""
 
     # Exchanges that support 50-level depth (Fyers TBT only supports NSE equity)
     TBT_SUPPORTED_EXCHANGES = {"NSE", "NFO"}
@@ -62,8 +62,8 @@ class FyersWebSocketAdapter(BaseBrokerWebSocketAdapter):
 
         # TBT subscription tracking
         self.tbt_subscriptions = {}  # symbol -> {ticker, exchange, channel}
-        self.tbt_symbol_to_ticker = {}  # OpenAlgo symbol -> Fyers ticker
-        self.tbt_ticker_to_symbol = {}  # Fyers ticker -> OpenAlgo symbol
+        self.tbt_symbol_to_ticker = {}  # TradeOS symbol -> Fyers ticker
+        self.tbt_ticker_to_symbol = {}  # Fyers ticker -> TradeOS symbol
 
         self.logger.info("Fyers WebSocket Adapter initialized")
 
@@ -235,7 +235,7 @@ class FyersWebSocketAdapter(BaseBrokerWebSocketAdapter):
                     return {"status": "error", "message": "Failed to reconnect Fyers adapter"}
 
             with self.lock:
-                # Convert to OpenAlgo format
+                # Convert to TradeOS format
                 symbol_info = [{"exchange": exchange, "symbol": symbol}]
 
                 # Create a unique callback for this specific subscription
@@ -444,7 +444,7 @@ class FyersWebSocketAdapter(BaseBrokerWebSocketAdapter):
         Subscribe to 50-level depth via TBT WebSocket
 
         Args:
-            symbol: OpenAlgo symbol (actual symbol without suffix)
+            symbol: TradeOS symbol (actual symbol without suffix)
             exchange: Exchange name
             callback: Data callback function
             original_symbol: Original symbol with :50 suffix for topic matching
@@ -518,7 +518,7 @@ class FyersWebSocketAdapter(BaseBrokerWebSocketAdapter):
         Unsubscribe from 50-level depth via TBT WebSocket and cleanup mappings
 
         Args:
-            symbol: OpenAlgo symbol (may include :50 suffix)
+            symbol: TradeOS symbol (may include :50 suffix)
             exchange: Exchange name
 
         Returns:
@@ -569,10 +569,10 @@ class FyersWebSocketAdapter(BaseBrokerWebSocketAdapter):
 
     def _convert_to_fyers_ticker(self, symbol: str, exchange: str) -> str | None:
         """
-        Convert OpenAlgo symbol to Fyers ticker format using database lookup
+        Convert TradeOS symbol to Fyers ticker format using database lookup
 
         Args:
-            symbol: OpenAlgo symbol (e.g., 'RELIANCE', 'NIFTY24DEC25000CE')
+            symbol: TradeOS symbol (e.g., 'RELIANCE', 'NIFTY24DEC25000CE')
             exchange: Exchange name (e.g., 'NSE', 'NFO')
 
         Returns:
@@ -638,13 +638,13 @@ class FyersWebSocketAdapter(BaseBrokerWebSocketAdapter):
                 self.logger.warning(f"No subscription data for key: {subscription_key}")
                 return
 
-            # Map to OpenAlgo format
+            # Map to TradeOS format
             symbol = subscription["symbol"]
             exchange = subscription["exchange"]
 
             self.logger.debug(f"Mapping TBT depth for {exchange}:{symbol}")
 
-            mapped_data = self.data_mapper.map_tbt_depth_to_openalgo(
+            mapped_data = self.data_mapper.map_tbt_depth_to_tradeos(
                 ticker, depth_data, symbol, exchange
             )
 
@@ -738,18 +738,18 @@ class FyersWebSocketAdapter(BaseBrokerWebSocketAdapter):
             # Fallback: assume stock/future, divide by 100
             return round(price_value / 100.0, 2)
 
-    def _map_fyers_to_openalgo(
+    def _map_fyers_to_tradeos(
         self, fyers_data: dict[str, Any], mode: int
     ) -> dict[str, Any] | None:
         """
-        Map Fyers data to OpenAlgo WebSocket format
+        Map Fyers data to TradeOS WebSocket format
 
         Args:
             fyers_data: Data from Fyers
             mode: Subscription mode
 
         Returns:
-            Mapped data in OpenAlgo format
+            Mapped data in TradeOS format
         """
         try:
             if not fyers_data:
@@ -763,8 +763,8 @@ class FyersWebSocketAdapter(BaseBrokerWebSocketAdapter):
                 exchange = fyers_data.get("exchange", "NSE")
                 symbol_name = symbol
 
-            # Base OpenAlgo format
-            openalgo_data = {
+            # Base TradeOS format
+            tradeos_data = {
                 "symbol": symbol_name,
                 "exchange": exchange,
                 "token": fyers_data.get("token", ""),
@@ -775,7 +775,7 @@ class FyersWebSocketAdapter(BaseBrokerWebSocketAdapter):
             if mode == 1:  # LTP
                 raw_ltp = fyers_data.get("ltp", 0)
                 converted_ltp = self._convert_price_to_rupees(raw_ltp, fyers_data)
-                openalgo_data.update({"ltp": converted_ltp, "data_type": "LTP"})
+                tradeos_data.update({"ltp": converted_ltp, "data_type": "LTP"})
             elif mode == 2:  # Quote
                 # Convert all price fields from paise to rupees using correct field names
                 raw_ltp = fyers_data.get("ltp", 0)
@@ -801,7 +801,7 @@ class FyersWebSocketAdapter(BaseBrokerWebSocketAdapter):
                 # Return the already mapped data (no additional processing needed)
                 return fyers_data
             elif mode == 3:  # Depth
-                openalgo_data.update(
+                tradeos_data.update(
                     {
                         "ltp": fyers_data.get("ltp", 0),
                         "depth": fyers_data.get("depth", {"buy": [], "sell": []}),
@@ -809,7 +809,7 @@ class FyersWebSocketAdapter(BaseBrokerWebSocketAdapter):
                     }
                 )
 
-            return openalgo_data
+            return tradeos_data
 
         except Exception as e:
             self.logger.error(f"Error mapping Fyers data: {e}")

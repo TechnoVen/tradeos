@@ -1,0 +1,25 @@
+{
+  "name": "tradeos",
+  "version": "2.0.0",
+  "description": "International AI-powered algorithmic trading platform. Built upon OpenAlgo.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "example": "examples",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TechnoVen/tradeos.git"
+  },
+  "keywords": ["trading", "algorithmic-trading", "ai", "crypto", "stocks"],
+  "author": "TechnoVen",
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/TechnoVen/tradeos/issues"
+  },
+  "homepage": "https://github.com/TechnoVen/tradeos#readme"
+}

@@ -1,4 +1,4 @@
-# Mapping OpenAlgo API Request https://openalgo.in/docs
+# Mapping TradeOS API Request https://tradeos.io/docs
 # Mapping Motilal Oswal Margin API - See Motilal_Oswal.md documentation
 # Note: Motilal Oswal does not provide a margin calculator API.
 
@@ -9,13 +9,13 @@ logger = get_logger(__name__)
 
 def transform_margin_positions(positions):
     """
-    Transform OpenAlgo margin position format to Motilal Oswal margin format.
+    Transform TradeOS margin position format to Motilal Oswal margin format.
 
     Note: Motilal Oswal does not provide a margin calculator API.
     This function is a placeholder for API consistency.
 
     Args:
-        positions: List of positions in OpenAlgo format
+        positions: List of positions in TradeOS format
 
     Returns:
         Empty list (API not supported)

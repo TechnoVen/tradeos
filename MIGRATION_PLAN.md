@@ -1,10 +1,10 @@
-# OpenAlgo v2.0.0.0 - React Migration Plan
+# TradeOS v2.0.0.0 - React Migration Plan
 
 ## Executive Summary
 
-Migration from Flask/Jinja2 frontend to a modern **React 19 + TypeScript + Vite 6** stack while **preserving the existing folder structure and startup command** for 60,000+ existing users. The React frontend will be embedded within the existing `openalgo/` directory and served by Flask.
+Migration from Flask/Jinja2 frontend to a modern **React 19 + TypeScript + Vite 6** stack while **preserving the existing folder structure and startup command** for 60,000+ existing users. The React frontend will be embedded within the existing `tradeos/` directory and served by Flask.
 
-**Version**: OpenAlgo 2.0.0.0
+**Version**: TradeOS 2.0.0.0
 **Codename**: Terminal Edition
 
 ### Critical Constraints
@@ -69,7 +69,7 @@ Migration from Flask/Jinja2 frontend to a modern **React 19 + TypeScript + Vite 
 ## 2. Architecture Overview (Preserving Existing Structure)
 
 ```
-openalgo/                           # EXISTING - NO CHANGES TO ROOT STRUCTURE
+tradeos/                           # EXISTING - NO CHANGES TO ROOT STRUCTURE
 ├── app.py                          # EXISTING - Modified to serve React build
 ├── extensions.py                   # EXISTING - UNCHANGED
 ├── cors.py                         # EXISTING - UNCHANGED
@@ -728,7 +728,7 @@ export const useThemeStore = create<ThemeStore>()(
         }
       },
     }),
-    { name: 'openalgo-theme' }
+    { name: 'tradeos-theme' }
   )
 );
 ```
@@ -1157,7 +1157,7 @@ export default defineConfig({
 
 set -e
 
-echo "🚀 Starting OpenAlgo..."
+echo "🚀 Starting TradeOS..."
 
 # Check for Node.js (required for frontend build)
 if ! command -v node &> /dev/null; then
@@ -1491,8 +1491,8 @@ node --version  # Should be v20.x.x
 npm --version   # Should be 10.x.x
 
 # Clone and setup
-git clone https://github.com/your-repo/openalgo.git
-cd openalgo
+git clone https://github.com/your-repo/tradeos.git
+cd tradeos
 
 # Python dependencies (existing)
 pip install -r requirements.txt
@@ -1512,8 +1512,8 @@ nvm install 20
 nvm use 20
 
 # Clone and setup
-git clone https://github.com/your-repo/openalgo.git
-cd openalgo
+git clone https://github.com/your-repo/tradeos.git
+cd tradeos
 
 # Python dependencies
 pip install -r requirements.txt
@@ -1532,7 +1532,7 @@ sudo apt-get install -y nodejs
 ```
 
 ### Graceful Degradation (No Node.js)
-If Node.js is not installed, OpenAlgo will:
+If Node.js is not installed, TradeOS will:
 1. Print a warning message
 2. Run in **API-only mode**
 3. All REST API endpoints work normally
@@ -1560,8 +1560,8 @@ def ensure_frontend_built():
 ## 9. Development Setup Commands
 
 ```bash
-# Navigate to openalgo directory
-cd openalgo
+# Navigate to tradeos directory
+cd tradeos
 
 # Create frontend directory
 mkdir -p frontend
@@ -1614,7 +1614,7 @@ npm install -D vitest @testing-library/react
 # frontend/.env
 VITE_API_URL=http://localhost:5000
 VITE_WS_URL=ws://localhost:5000
-VITE_APP_NAME=OpenAlgo
+VITE_APP_NAME=TradeOS
 VITE_APP_VERSION=2.0.0
 ```
 
@@ -1702,9 +1702,9 @@ services:
 
 ## Summary
 
-### OpenAlgo v2.0.0.0 - Terminal Edition
+### TradeOS v2.0.0.0 - Terminal Edition
 
-This migration plan transforms OpenAlgo into a **professional-grade trading terminal** with:
+This migration plan transforms TradeOS into a **professional-grade trading terminal** with:
 
 | Feature | Description |
 |---------|-------------|
@@ -1719,7 +1719,7 @@ This migration plan transforms OpenAlgo into a **professional-grade trading term
 | **Graceful Degradation** | Works without Node.js (API-only mode) |
 
 ### What Changes
-- New `frontend/` directory inside `openalgo/`
+- New `frontend/` directory inside `tradeos/`
 - React frontend served by Flask
 - Auto-build on startup
 

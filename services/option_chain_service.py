@@ -194,7 +194,7 @@ def get_option_chain(
         exchange: Exchange (NSE_INDEX, NSE, NFO, BSE_INDEX, BSE, BFO, MCX, CDS)
         expiry_date: Expiry date in DDMMMYY format (e.g., 28NOV25)
         strike_count: Number of strikes above and below ATM
-        api_key: OpenAlgo API key
+        api_key: TradeOS API key
 
     Returns:
         Tuple of (success, response_data, status_code)

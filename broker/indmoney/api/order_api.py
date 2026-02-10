@@ -263,7 +263,7 @@ def get_holdings(auth):
 
 
 def get_open_position(tradingsymbol, exchange, product, auth):
-    # Convert Trading Symbol from OpenAlgo Format to Broker Format Before Search in OpenPosition
+    # Convert Trading Symbol from TradeOS Format to Broker Format Before Search in OpenPosition
     tradingsymbol = get_br_symbol(tradingsymbol, exchange)
     positions_response = get_positions(auth)
     net_qty = "0"
@@ -359,7 +359,7 @@ def place_order_api(data, auth):
             # Indmoney returns order ID in data.order_id field
             orderid = response_data.get("data", {}).get("order_id")
             logger.info(f"Order placed successfully with ID: {orderid}")
-            # Format response to match OpenAlgo API standard
+            # Format response to match TradeOS API standard
             response_data = {"orderid": orderid, "status": "success"}
         elif response_data and response_data.get("status") in ["error", "failure"]:
             # Handle API errors/failures - but check if order was actually placed
@@ -510,7 +510,7 @@ def close_all_positions(current_api_key, auth):
             else:
                 exchange = segment
 
-            # get openalgo symbol to send to placeorder function
+            # get tradeos symbol to send to placeorder function
             symbol = get_symbol(position["security_id"], exchange)
             logger.info(f"The Symbol is {symbol}")
 

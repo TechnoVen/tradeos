@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The Dashboard is your command center in OpenAlgo. It provides a quick snapshot of your trading activity, account status, and key metrics at a glance.
+The Dashboard is your command center in TradeOS. It provides a quick snapshot of your trading activity, account status, and key metrics at a glance.
 
 ## Accessing the Dashboard
 
@@ -17,7 +17,7 @@ Or click **Dashboard** in the navigation menu.
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│  OpenAlgo                              🔔  👤 Admin  [Logout]               │
+│  TradeOS                              🔔  👤 Admin  [Logout]               │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                              │
 │  ┌─────────────────────────────────────────────────────────────────────┐   │
@@ -267,7 +267,7 @@ On mobile devices, the dashboard adapts:
 
 ### Morning Routine
 
-1. ☐ Open OpenAlgo
+1. ☐ Open TradeOS
 2. ☐ Login to broker
 3. ☐ Verify "Connected" status
 4. ☐ Check available margin

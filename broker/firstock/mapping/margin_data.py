@@ -1,4 +1,4 @@
-# Mapping OpenAlgo API Request https://openalgo.in/docs
+# Mapping TradeOS API Request https://tradeos.io/docs
 # Firstock does not provide position-specific Margin Calculator API
 
 from utils.logging import get_logger
@@ -8,13 +8,13 @@ logger = get_logger(__name__)
 
 def transform_margin_position(position, user_id):
     """
-    Transform a single OpenAlgo margin position to broker format.
+    Transform a single TradeOS margin position to broker format.
 
     Note: Firstock does not provide a position-specific margin calculator API.
     The available Limit API only returns account-level margin information.
 
     Args:
-        position: Position in OpenAlgo format
+        position: Position in TradeOS format
         user_id: Firstock user ID
 
     Raises:
@@ -25,7 +25,7 @@ def transform_margin_position(position, user_id):
 
 def parse_margin_response(response_data):
     """
-    Parse broker margin calculator response to OpenAlgo standard format.
+    Parse broker margin calculator response to TradeOS standard format.
 
     Note: Firstock does not provide a position-specific margin calculator API.
     The available Limit API only returns account-level margin information.

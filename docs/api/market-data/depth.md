@@ -58,7 +58,7 @@ Custom Domain:  POST https://<your-custom-domain>/api/v1/depth
 
 | Parameter | Description | Mandatory/Optional | Default Value |
 |-----------|-------------|-------------------|---------------|
-| apikey | Your OpenAlgo API key | Mandatory | - |
+| apikey | Your TradeOS API key | Mandatory | - |
 | symbol | Trading symbol | Mandatory | - |
 | exchange | Exchange code: NSE, BSE, NFO, BFO, CDS, BCD, MCX | Mandatory | - |
 

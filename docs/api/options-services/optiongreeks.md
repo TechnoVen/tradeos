@@ -53,7 +53,7 @@ Custom Domain:  POST https://<your-custom-domain>/api/v1/optiongreeks
 
 | Parameter | Description | Mandatory/Optional | Default Value |
 |-----------|-------------|-------------------|---------------|
-| apikey | Your OpenAlgo API key | Mandatory | - |
+| apikey | Your TradeOS API key | Mandatory | - |
 | symbol | Option symbol | Mandatory | - |
 | exchange | Exchange: NFO, BFO, CDS, MCX | Mandatory | - |
 | interest_rate | Risk-free interest rate (annualized %) | Optional | 0 |

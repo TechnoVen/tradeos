@@ -13,7 +13,7 @@ def calculate_margin_api(positions, auth):
     margin requirements for specific positions.
 
     Args:
-        positions: List of positions in OpenAlgo format
+        positions: List of positions in TradeOS format
         auth: Authentication token for Firstock
 
     Raises:

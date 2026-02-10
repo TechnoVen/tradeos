@@ -1,8 +1,10 @@
 {
     "Plugin Name": "aliceblue",
-    "Plugin URI": "https://openalgo.in",
-    "Description": "AliceBlue OpenAlgo Plugin",
+    "Plugin URI": "https://github.com/TechnoVen/tradeos",
+    "Description": "AliceBlue TradeOS Plugin",
     "Version": "1.0",
     "Author": "Deepanshu Goyal",
-    "Author URI": "https://openalgo.in"
+    "Author URI": "https://github.com/TechnoVen/tradeos",
+    "region": "IN",
+    "enabled": false
 }

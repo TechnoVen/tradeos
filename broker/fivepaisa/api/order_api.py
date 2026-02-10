@@ -186,8 +186,8 @@ def get_open_position(
     """Get open position for a specific trading symbol
 
     Args:
-        tradingsymbol (str): Trading symbol in OpenAlgo format
-        exchange (str): Exchange in OpenAlgo format
+        tradingsymbol (str): Trading symbol in TradeOS format
+        exchange (str): Exchange in TradeOS format
         Exch (str): Exchange in 5Paisa format
         ExchType (str): Exchange type in 5Paisa format
         producttype (str): Product type (MIS, NRML, etc.)
@@ -197,7 +197,7 @@ def get_open_position(
         str: Net quantity as string, '0' if no position found
     """
     try:
-        # Convert Trading Symbol from OpenAlgo Format to Broker Format Before Search in OpenPosition
+        # Convert Trading Symbol from TradeOS Format to Broker Format Before Search in OpenPosition
         token = int(get_token(tradingsymbol, exchange))  # Convert token to integer
         tradingsymbol = get_br_symbol(tradingsymbol, exchange)
         positions_data = get_positions(auth)
@@ -403,7 +403,7 @@ def close_all_positions(current_api_key: str, auth: str) -> dict[str, Any]:
             quantity = abs(int(position["NetQty"]))
 
             exchange = reverse_map_exchange(position["Exch"], position["ExchType"])
-            # get openalgo symbol to send to placeorder function
+            # get tradeos symbol to send to placeorder function
 
             symbol = get_symbol(position["ScripCode"], exchange)
 

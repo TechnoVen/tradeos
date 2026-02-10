@@ -12,11 +12,11 @@ if len(sys.argv) < 3:
 api_key = sys.argv[1]
 host = sys.argv[2]
 
-# Initialize OpenAlgo client with provided arguments
+# Initialize TradeOS client with provided arguments
 client = api(api_key=api_key, host=host)
 
 # Create MCP server
-mcp = FastMCP("openalgo")
+mcp = FastMCP("tradeos")
 
 # ORDER MANAGEMENT TOOLS
 
@@ -919,12 +919,12 @@ def get_option_greeks(
 
 
 @mcp.tool()
-def get_openalgo_version() -> str:
-    """Get the OpenAlgo library version."""
+def get_tradeos_version() -> str:
+    """Get the TradeOS library version."""
     try:
         import openalgo
 
-        return f"OpenAlgo version: {openalgo.__version__}"
+        return f"TradeOS version: {tradeos.__version__}"
     except Exception as e:
         return f"Error getting version: {str(e)}"
 
@@ -966,7 +966,7 @@ def send_telegram_alert(username: str, message: str) -> str:
     Send a Telegram alert notification.
 
     Args:
-        username: OpenAlgo login ID/username
+        username: TradeOS login ID/username
         message: Alert message to send
 
     Returns:

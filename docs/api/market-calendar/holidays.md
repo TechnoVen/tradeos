@@ -69,7 +69,7 @@ Custom Domain:  POST https://<your-custom-domain>/api/v1/holidays
 
 | Parameter | Description | Mandatory/Optional | Default Value |
 |-----------|-------------|-------------------|---------------|
-| apikey | Your OpenAlgo API key | Mandatory | - |
+| apikey | Your TradeOS API key | Mandatory | - |
 | year | Year to get holidays for (2020-2050) | Optional | Current year |
 
 ## Response Fields

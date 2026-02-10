@@ -740,7 +740,7 @@ if __name__ == "__main__":
     version = get_version()
     web_url = f"http://{display_ip}:{port}"
     ws_url = f"ws://{display_ip}:{ws_port}"
-    docs_url = "https://docs.openalgo.in"
+    docs_url = "https://docs.tradeos.in"
 
     # Use ngrok URL if tunnel was established
     host_server = ngrok_url if ngrok_url else ""
@@ -772,7 +772,7 @@ if __name__ == "__main__":
         def visible_len(text: str) -> int:
             return len(ansi_escape.sub("", text))
 
-        title = f" OpenAlgo v{version} "
+        title = f" TradeOS v{version} "
 
         content_samples = [
             "",

@@ -109,7 +109,7 @@ def get_straddle_chart_data(
         exchange: Underlying exchange (e.g., "NSE_INDEX", "BSE_INDEX")
         expiry_date: Expiry in DDMMMYY format (e.g., "06FEB26")
         interval: Candle interval (e.g., "1m", "5m")
-        api_key: OpenAlgo API key
+        api_key: TradeOS API key
         days: Number of days of history (default 5)
 
     Returns:

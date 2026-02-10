@@ -1,4 +1,4 @@
-# OpenAlgo Flow Migration Tracker
+# TradeOS Flow Migration Tracker
 
 ## Overview
 
@@ -7,8 +7,8 @@
 | **Start Date** | 2026-01-16 |
 | **Target Completion** | TBD |
 | **Current Status** | Phase 1, 2 & 3 Complete |
-| **Source** | `openalgo-flow/` |
-| **Target** | `openalgo/` |
+| **Source** | `tradeos-flow/` |
+| **Target** | `tradeos/` |
 
 ---
 
@@ -59,7 +59,7 @@
 
 | # | Service | File | Status | Description |
 |---|---------|------|--------|-------------|
-| 1 | FlowOpenAlgoClient | `services/flow_openalgo_client.py` | ✅ | Direct service wrapper |
+| 1 | FlowTradeOSClient | `services/flow_tradeos_client.py` | ✅ | Direct service wrapper |
 | 2 | FlowExecutor | `services/flow_executor_service.py` | ✅ | Workflow executor |
 | 3 | FlowScheduler | `services/flow_scheduler_service.py` | ✅ | APScheduler |
 | 4 | FlowPriceMonitor | `services/flow_price_monitor_service.py` | ✅ | Price alerts |
@@ -75,7 +75,7 @@
 
 ## Phase 2: Service Mapping ✅
 
-**Implementation:** `services/flow_openalgo_client.py`
+**Implementation:** `services/flow_tradeos_client.py`
 
 ### Order Services
 
@@ -107,7 +107,7 @@
 | 9 | `search_symbols()` | search_service.py | ✅ |
 | 10 | `get_expiry()` | expiry_service.py | ✅ |
 
-> Note: `get_intervals()` not implemented in openalgo-flow backend executor
+> Note: `get_intervals()` not implemented in tradeos-flow backend executor
 
 ### Options & Account Services
 
@@ -351,7 +351,7 @@
 | 2026-01-16 | 1 | Created all backend files: flow_db.py, flow.py blueprint, 4 services |
 | 2026-01-16 | 1 | Created migrate_flow.py and added to migrate_all.py |
 | 2026-01-16 | 1 | Registered blueprint in app.py with CSRF exemption |
-| 2026-01-16 | 2 | Implemented initial service mappings in flow_openalgo_client.py |
+| 2026-01-16 | 2 | Implemented initial service mappings in flow_tradeos_client.py |
 | 2026-01-16 | 2 | Added remaining 7 methods: get_multi_quotes, get_order_status, symbol, search_symbols, get_expiry, syntheticfuture, get_option_greeks |
 | 2026-01-19 | 2 | Fixed timing-vulnerable webhook secret comparison (hmac.compare_digest) |
 | 2026-01-19 | 3 | Added @xyflow/react dependency to package.json |
@@ -372,7 +372,7 @@
 |-------|------|-------------|
 | 1 | `database/flow_db.py` | Database models and CRUD |
 | 1 | `blueprints/flow.py` | Flask blueprint with routes |
-| 1 | `services/flow_openalgo_client.py` | Direct service wrapper |
+| 1 | `services/flow_tradeos_client.py` | Direct service wrapper |
 | 1 | `services/flow_executor_service.py` | Workflow executor |
 | 1 | `services/flow_scheduler_service.py` | APScheduler integration |
 | 1 | `services/flow_price_monitor_service.py` | Price alert monitoring |
@@ -397,6 +397,6 @@
 ## Notes
 
 - **Do NOT port:** Settings page, Profile page, separate Auth system
-- **Use:** OpenAlgo's existing auth, API key from /playground, DATABASE_URL from .env
-- Source nodes path: `openalgo-flow/frontend/src/components/nodes/`
-- Target nodes path: `openalgo/frontend/src/components/flow/nodes/`
+- **Use:** TradeOS's existing auth, API key from /playground, DATABASE_URL from .env
+- Source nodes path: `tradeos-flow/frontend/src/components/nodes/`
+- Target nodes path: `tradeos/frontend/src/components/flow/nodes/`

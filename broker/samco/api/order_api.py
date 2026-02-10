@@ -280,7 +280,7 @@ def close_all_positions(current_api_key, auth):
 
             quantity = abs(net_qty)
 
-            # Get OpenAlgo symbol using tradingSymbol and exchange
+            # Get TradeOS symbol using tradingSymbol and exchange
             symbol = get_oa_symbol(position.get("tradingSymbol"), position.get("exchange"))
             logger.info(f"Close position: symbol={symbol}, action={action}, qty={quantity}")
 

@@ -127,7 +127,7 @@ def get_order_book(auth):
         auth (str): Authentication token
 
     Returns:
-        dict: Order book data in OpenAlgo format
+        dict: Order book data in TradeOS format
     """
     try:
         # Get API key from environment
@@ -161,29 +161,29 @@ def get_order_book(auth):
 
         response.raise_for_status()
 
-        # Transform response data to OpenAlgo format
+        # Transform response data to TradeOS format
         response_data = response.json()
         logger.debug(f"get_order_book - Raw response data: {response_data}")
 
         if response_data["s"] == "ok":
             # print(f"[DEBUG] get_order_book - Found {len(response_data['d'])} orders")
-            # Transform each order to OpenAlgo format
+            # Transform each order to TradeOS format
             transformed_orders = []
             for order in response_data["d"]:
                 # logger.debug(f"[DEBUG] get_order_book - Processing order: {order}")
                 try:
-                    # Get OpenAlgo symbol using symbol and exchange
-                    openalgo_symbol = get_oa_symbol(order["sym"]["id"], order["sym"]["exch"])
-                    # print(f"[DEBUG] get_order_book - OpenAlgo symbol lookup for symbol {order['sym']['sym']}: {openalgo_symbol}")
+                    # Get TradeOS symbol using symbol and exchange
+                    tradeos_symbol = get_oa_symbol(order["sym"]["id"], order["sym"]["exch"])
+                    # print(f"[DEBUG] get_order_book - TradeOS symbol lookup for symbol {order['sym']['sym']}: {tradeos_symbol}")
 
                     transformed_order = {
-                        "stat": "Ok",  # OpenAlgo expects 'stat' field
+                        "stat": "Ok",  # TradeOS expects 'stat' field
                         "data": {
-                            "tradingsymbol": openalgo_symbol
-                            if openalgo_symbol
+                            "tradingsymbol": tradeos_symbol
+                            if tradeos_symbol
                             else order["sym"][
                                 "sym"
-                            ],  # Fallback to Tradejini symbol if OpenAlgo not found
+                            ],  # Fallback to Tradejini symbol if TradeOS not found
                             "exchange": order["sym"]["exch"],
                             "token": order["symId"],
                             "exch": order["sym"]["exch"],
@@ -235,7 +235,7 @@ def get_trade_book(auth):
         auth (str): Authentication token
 
     Returns:
-        dict: Trade book data in OpenAlgo format {'data': [...], 'status': 'success'}
+        dict: Trade book data in TradeOS format {'data': [...], 'status': 'success'}
     """
     try:
         # Get API key from environment
@@ -282,17 +282,17 @@ def get_trade_book(auth):
         trades_data = response_data.get("d", [])
         logger.info(f"get_trade_book - Found {len(trades_data)} trades")
 
-        # Transform trades directly to OpenAlgo format
+        # Transform trades directly to TradeOS format
         transformed_trades = []
         for trade in trades_data:
             try:
                 # Get symbol details
                 symbol = trade.get("sym", {})
 
-                # Get OpenAlgo symbol
-                openalgo_symbol = None
+                # Get TradeOS symbol
+                tradeos_symbol = None
                 try:
-                    openalgo_symbol = get_oa_symbol(symbol.get("id", ""), symbol.get("exch", ""))
+                    tradeos_symbol = get_oa_symbol(symbol.get("id", ""), symbol.get("exch", ""))
                 except Exception as e:
                     logger.warning(f"get_trade_book - Symbol lookup failed: {str(e)}")
 
@@ -313,13 +313,13 @@ def get_trade_book(auth):
                 side = trade.get("side", "").lower()
                 action = "BUY" if side == "buy" else "SELL"
 
-                # Create transformed trade - match OpenAlgo format exactly
-                # Determine the symbol to use (OpenAlgo symbol if available)
+                # Create transformed trade - match TradeOS format exactly
+                # Determine the symbol to use (TradeOS symbol if available)
                 final_symbol = ""
-                if openalgo_symbol:
-                    final_symbol = openalgo_symbol
+                if tradeos_symbol:
+                    final_symbol = tradeos_symbol
                 else:
-                    # Fallback to exchange symbol if OpenAlgo symbol isn't available
+                    # Fallback to exchange symbol if TradeOS symbol isn't available
                     final_symbol = symbol.get("sym", symbol.get("trdSym", ""))
 
                 transformed_trade = {
@@ -329,7 +329,7 @@ def get_trade_book(auth):
                     "orderid": str(trade.get("orderId", "")),
                     "product": product,
                     "quantity": int(trade.get("fillQty", 0)),
-                    "symbol": final_symbol,  # Using OpenAlgo symbol here
+                    "symbol": final_symbol,  # Using TradeOS symbol here
                     "timestamp": trade.get("time", ""),
                     "trade_value": float(trade.get("fillValue", 0.0)),
                 }
@@ -366,7 +366,7 @@ def get_positions(auth):
         auth (str): Authentication token
 
     Returns:
-        dict: Positions data in OpenAlgo format
+        dict: Positions data in TradeOS format
     """
     try:
         # Get API key from environment
@@ -423,42 +423,42 @@ def get_positions(auth):
                         f"Position data: symId={symbol_id}, tradingsymbol={tradingsymbol}, exchange={exchange}"
                     )
 
-                    # Get OpenAlgo symbol - follow same approach as TradeBook implementation
-                    openalgo_symbol = None
+                    # Get TradeOS symbol - follow same approach as TradeBook implementation
+                    tradeos_symbol = None
                     try:
                         # First try with the symbol ID from sym object
                         symid_from_object = sym.get("id", "")
                         if symid_from_object:
-                            openalgo_symbol = get_oa_symbol(symid_from_object, exchange)
+                            tradeos_symbol = get_oa_symbol(symid_from_object, exchange)
                             logger.info(
-                                f"Symbol lookup with sym.id: {symid_from_object} -> {openalgo_symbol}"
+                                f"Symbol lookup with sym.id: {symid_from_object} -> {tradeos_symbol}"
                             )
 
                         # If not found and we have the position symId, try that
-                        if not openalgo_symbol and symbol_id:
-                            openalgo_symbol = get_oa_symbol(symbol_id, "")
+                        if not tradeos_symbol and symbol_id:
+                            tradeos_symbol = get_oa_symbol(symbol_id, "")
                             logger.info(
-                                f"Symbol lookup with position.symId: {symbol_id} -> {openalgo_symbol}"
+                                f"Symbol lookup with position.symId: {symbol_id} -> {tradeos_symbol}"
                             )
 
                         # If still not found, try with exchange symbol
-                        if not openalgo_symbol:
-                            openalgo_symbol = get_oa_symbol(exchange_symbol, exchange)
+                        if not tradeos_symbol:
+                            tradeos_symbol = get_oa_symbol(exchange_symbol, exchange)
                             logger.info(
-                                f"Symbol lookup with exchange symbol: {exchange_symbol} -> {openalgo_symbol}"
+                                f"Symbol lookup with exchange symbol: {exchange_symbol} -> {tradeos_symbol}"
                             )
 
                     except Exception as e:
                         logger.warning(f"Symbol lookup failed: {str(e)}")
-                        openalgo_symbol = None
+                        tradeos_symbol = None
 
                     # Determine the final symbol to use
                     final_symbol = ""
-                    if openalgo_symbol:
-                        final_symbol = openalgo_symbol
-                        logger.info(f"Using OpenAlgo symbol: {final_symbol}")
+                    if tradeos_symbol:
+                        final_symbol = tradeos_symbol
+                        logger.info(f"Using TradeOS symbol: {final_symbol}")
                     else:
-                        # Fallback to exchange symbol if OpenAlgo symbol isn't available
+                        # Fallback to exchange symbol if TradeOS symbol isn't available
                         final_symbol = exchange_symbol
                         logger.info(f"Fallback to exchange symbol: {final_symbol}")
 
@@ -473,17 +473,17 @@ def get_positions(auth):
                     else:
                         mapped_product = "MIS"  # Default
 
-                    # Format the position data according to OpenAlgo format
+                    # Format the position data according to TradeOS format
                     # Removing tradingsymbol field as requested
                     transformed_position = {
-                        "symbol": final_symbol,  # Use final symbol (OpenAlgo or fallback)
+                        "symbol": final_symbol,  # Use final symbol (TradeOS or fallback)
                         "exchange": exchange,
                         "product": mapped_product,
                         "quantity": net_qty,
                         "average_price": str(round(float(position.get("netAvgPrice", 0.0)), 2)),
                     }
 
-                    logger.debug(f"Position transformed: {tradingsymbol} → {openalgo_symbol}")
+                    logger.debug(f"Position transformed: {tradingsymbol} → {tradeos_symbol}")
 
                     positions_list.append(transformed_position)
                     logger.debug(f"Transformed position: {transformed_position}")
@@ -492,7 +492,7 @@ def get_positions(auth):
                     logger.error(f"Error transforming position: {str(e)}", exc_info=True)
                     continue
 
-            # Return in OpenAlgo format - same pattern as orderbook and tradebook
+            # Return in TradeOS format - same pattern as orderbook and tradebook
             return {"status": "success", "data": positions_list}
         else:
             error_msg = response_data.get("d", {}).get("message", "Unknown error")
@@ -525,7 +525,7 @@ def get_holdings(auth):
         auth (str): Authentication token
 
     Returns:
-        dict: Holdings data in OpenAlgo format
+        dict: Holdings data in TradeOS format
         {
             "data": {
                 "holdings": [
@@ -688,9 +688,9 @@ def get_open_position(tradingsymbol, exchange, producttype, auth):
             logger.error(f"get_open_position - Invalid positions response: {positions_response}")
             return "0"
 
-        # Check if this is already in OpenAlgo format
+        # Check if this is already in TradeOS format
         if positions_response.get("status") == "success" and "data" in positions_response:
-            logger.info("get_open_position - Processing OpenAlgo format positions")
+            logger.info("get_open_position - Processing TradeOS format positions")
             positions = positions_response["data"]
 
             for position in positions:
@@ -702,17 +702,17 @@ def get_open_position(tradingsymbol, exchange, producttype, auth):
                 pos_qty = int(float(position.get("quantity", 0)))
 
                 logger.info(
-                    f"get_open_position - Checking OpenAlgo position: {pos_symbol} on {pos_exch}, qty: {pos_qty}"
+                    f"get_open_position - Checking TradeOS position: {pos_symbol} on {pos_exch}, qty: {pos_qty}"
                 )
 
                 if pos_exch == exchange and pos_symbol == tradingsymbol and pos_qty != 0:
                     logger.info(
-                        f"get_open_position - Found matching OpenAlgo position: {pos_symbol} with quantity {pos_qty}"
+                        f"get_open_position - Found matching TradeOS position: {pos_symbol} with quantity {pos_qty}"
                     )
                     return str(pos_qty)
 
             logger.info(
-                f"get_open_position - No matching OpenAlgo position found for {tradingsymbol} on {exchange}"
+                f"get_open_position - No matching TradeOS position found for {tradingsymbol} on {exchange}"
             )
             return "0"
 
@@ -1127,7 +1127,7 @@ def place_smartorder_api(data, auth):
                 f"place_smartorder_api - place_order_api response - res: {res}, response: {response}, orderid: {orderid}"
             )
 
-            # Format response to match OpenAlgo's expected format
+            # Format response to match TradeOS's expected format
             if (
                 response
                 and isinstance(response, dict)
@@ -1177,7 +1177,7 @@ def close_all_positions(current_api_key, auth):
         auth (str): Authentication token
 
     Returns:
-        dict: Response with status and message in OpenAlgo format
+        dict: Response with status and message in TradeOS format
               {
                   'status': 'success' or 'error',
                   'message': 'Descriptive message'
@@ -1276,7 +1276,7 @@ def close_all_positions(current_api_key, auth):
                 )
                 failed_count += 1
 
-        # Prepare final response in OpenAlgo format
+        # Prepare final response in TradeOS format
         if success_count > 0 or failed_count == 0:
             message = (
                 "All Open Positions SquaredOff" if success_count > 0 else "No positions to close"

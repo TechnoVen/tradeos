@@ -1,4 +1,4 @@
-# Mapping OpenAlgo API Request https://openalgo.in/docs
+# Mapping TradeOS API Request https://tradeos.io/docs
 # Mapping Motilal Oswal Parameters - See Motilal_Oswal.md documentation
 
 from database.token_db import get_br_symbol
@@ -6,9 +6,9 @@ from database.token_db import get_br_symbol
 
 def map_exchange(exchange):
     """
-    Maps OpenAlgo exchange names to Motilal Oswal exchange names.
+    Maps TradeOS exchange names to Motilal Oswal exchange names.
 
-    OpenAlgo uses: NSE, BSE, NFO, CDS, MCX, BFO
+    TradeOS uses: NSE, BSE, NFO, CDS, MCX, BFO
     Motilal uses: NSE, BSE, NSEFO, NSECD, MCX, BSEFO
     """
     exchange_mapping = {
@@ -27,7 +27,7 @@ def map_exchange(exchange):
 
 def reverse_map_exchange(exchange):
     """
-    Reverse maps Motilal Oswal exchange names to OpenAlgo exchange names.
+    Reverse maps Motilal Oswal exchange names to TradeOS exchange names.
     """
     reverse_exchange_mapping = {
         "NSE": "NSE",
@@ -42,11 +42,11 @@ def reverse_map_exchange(exchange):
 
 def transform_data(data, token):
     """
-    Transforms the OpenAlgo API request structure to Motilal Oswal expected structure.
+    Transforms the TradeOS API request structure to Motilal Oswal expected structure.
     """
     symbol = get_br_symbol(data["symbol"], data["exchange"])
-    openalgo_exchange = data["exchange"]
-    motilal_exchange = map_exchange(openalgo_exchange)
+    tradeos_exchange = data["exchange"]
+    motilal_exchange = map_exchange(tradeos_exchange)
 
     # Basic mapping for Motilal Oswal
     transformed = {
@@ -58,8 +58,8 @@ def transform_data(data, token):
         "exchange": motilal_exchange,
         "ordertype": map_order_type(data["pricetype"]),
         "producttype": map_product_type(
-            data["product"], openalgo_exchange
-        ),  # Pass OpenAlgo exchange for context
+            data["product"], tradeos_exchange
+        ),  # Pass TradeOS exchange for context
         "orderduration": "DAY",  # Motilal uses 'orderduration' instead of 'duration'
         "price": data.get("price", "0"),
         "triggerprice": data.get("trigger_price", "0"),
@@ -81,7 +81,7 @@ def transform_modify_order_data(data, token, lastmodifiedtime, qtytradedtoday):
     Motilal uses different field names compared to Angel Broking.
 
     Args:
-        data: OpenAlgo modify order request data
+        data: TradeOS modify order request data
         token: Symbol token for the instrument
         lastmodifiedtime: Last modified time from order book (dd-MMM-yyyy HH:mm:ss format)
         qtytradedtoday: Quantity traded today from order book
@@ -105,7 +105,7 @@ def transform_modify_order_data(data, token, lastmodifiedtime, qtytradedtoday):
 
 def map_order_type(pricetype):
     """
-    Maps OpenAlgo pricetype to Motilal Oswal order type.
+    Maps TradeOS pricetype to Motilal Oswal order type.
     Motilal supports: LIMIT, MARKET, STOPLOSS
     """
     order_type_mapping = {
@@ -119,7 +119,7 @@ def map_order_type(pricetype):
 
 def map_product_type(product, exchange=None):
     """
-    Maps OpenAlgo product type to Motilal Oswal product type based on exchange.
+    Maps TradeOS product type to Motilal Oswal product type based on exchange.
     Motilal supports: NORMAL, DELIVERY, VALUEPLUS, SELLFROMDP, BTST, MTF
 
     Product type mapping:
@@ -137,11 +137,11 @@ def map_product_type(product, exchange=None):
     Accounts may have specific product authorizations based on their configuration.
 
     Args:
-        product: OpenAlgo product type (CNC, MIS, NRML)
-        exchange: OpenAlgo exchange name (NSE, BSE, NFO, CDS, MCX, BFO)
+        product: TradeOS product type (CNC, MIS, NRML)
+        exchange: TradeOS exchange name (NSE, BSE, NFO, CDS, MCX, BFO)
     """
     # Determine if this is a cash segment or derivative segment
-    # Using OpenAlgo exchange names
+    # Using TradeOS exchange names
     is_cash_segment = exchange in ["NSE", "BSE"]
     is_fo_segment = exchange in ["NFO", "MCX", "CDS", "BFO", "NSEFO", "NSECD", "BSEFO"]
 
@@ -175,7 +175,7 @@ def map_product_type(product, exchange=None):
 
 def reverse_map_product_type(product, exchange=None):
     """
-    Reverse maps Motilal Oswal product type to OpenAlgo product type.
+    Reverse maps Motilal Oswal product type to TradeOS product type.
     Context:
     - Motilal uses DELIVERY for cash delivery (CNC)
     - Motilal uses VALUEPLUS for margin intraday (MIS)

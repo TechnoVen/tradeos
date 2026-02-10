@@ -63,7 +63,7 @@ Custom Domain:  POST https://<your-custom-domain>/api/v1/search
 
 | Parameter | Description | Mandatory/Optional | Default Value |
 |-----------|-------------|-------------------|---------------|
-| apikey | Your OpenAlgo API key | Mandatory | - |
+| apikey | Your TradeOS API key | Mandatory | - |
 | query | Search query string | Mandatory | - |
 | exchange | Exchange code: NSE, BSE, NFO, BFO, CDS, BCD, MCX | Mandatory | - |
 
@@ -79,10 +79,10 @@ Custom Domain:  POST https://<your-custom-domain>/api/v1/search
 
 | Field | Type | Description |
 |-------|------|-------------|
-| symbol | string | OpenAlgo standard symbol |
+| symbol | string | TradeOS standard symbol |
 | brsymbol | string | Broker-specific symbol |
 | name | string | Underlying/symbol name |
-| exchange | string | OpenAlgo exchange code |
+| exchange | string | TradeOS exchange code |
 | brexchange | string | Broker-specific exchange code |
 | instrumenttype | string | CE, PE, FUT, EQ |
 | expiry | string | Expiry date (DD-MMM-YY) |

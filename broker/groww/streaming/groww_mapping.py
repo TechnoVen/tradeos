@@ -4,9 +4,9 @@ Groww exchange mapping and capability registry for WebSocket streaming
 
 
 class GrowwExchangeMapper:
-    """Maps OpenAlgo exchange codes to Groww exchange/segment format"""
+    """Maps TradeOS exchange codes to Groww exchange/segment format"""
 
-    # Mapping from OpenAlgo exchange to Groww exchange and segment
+    # Mapping from TradeOS exchange to Groww exchange and segment
     EXCHANGE_MAP = {
         "NSE": {"exchange": "NSE", "segment": "CASH"},
         "BSE": {"exchange": "BSE", "segment": "CASH"},
@@ -20,46 +20,46 @@ class GrowwExchangeMapper:
     }
 
     @classmethod
-    def get_exchange(cls, openalgo_exchange: str) -> str:
+    def get_exchange(cls, tradeos_exchange: str) -> str:
         """
-        Get Groww exchange from OpenAlgo exchange code
+        Get Groww exchange from TradeOS exchange code
 
         Args:
-            openalgo_exchange: OpenAlgo exchange code (e.g., 'NSE', 'NFO')
+            tradeos_exchange: TradeOS exchange code (e.g., 'NSE', 'NFO')
 
         Returns:
             str: Groww exchange code
         """
-        mapping = cls.EXCHANGE_MAP.get(openalgo_exchange, {})
-        return mapping.get("exchange", openalgo_exchange)
+        mapping = cls.EXCHANGE_MAP.get(tradeos_exchange, {})
+        return mapping.get("exchange", tradeos_exchange)
 
     @classmethod
-    def get_segment(cls, openalgo_exchange: str) -> str:
+    def get_segment(cls, tradeos_exchange: str) -> str:
         """
-        Get Groww segment from OpenAlgo exchange code
+        Get Groww segment from TradeOS exchange code
 
         Args:
-            openalgo_exchange: OpenAlgo exchange code (e.g., 'NSE', 'NFO')
+            tradeos_exchange: TradeOS exchange code (e.g., 'NSE', 'NFO')
 
         Returns:
             str: Groww segment (CASH, FNO, COMM, CDS)
         """
-        mapping = cls.EXCHANGE_MAP.get(openalgo_exchange, {})
+        mapping = cls.EXCHANGE_MAP.get(tradeos_exchange, {})
         return mapping.get("segment", "CASH")
 
     @classmethod
-    def get_exchange_segment(cls, openalgo_exchange: str) -> tuple:
+    def get_exchange_segment(cls, tradeos_exchange: str) -> tuple:
         """
-        Get both exchange and segment from OpenAlgo exchange code
+        Get both exchange and segment from TradeOS exchange code
 
         Args:
-            openalgo_exchange: OpenAlgo exchange code
+            tradeos_exchange: TradeOS exchange code
 
         Returns:
             tuple: (exchange, segment)
         """
-        mapping = cls.EXCHANGE_MAP.get(openalgo_exchange, {})
-        return mapping.get("exchange", openalgo_exchange), mapping.get("segment", "CASH")
+        mapping = cls.EXCHANGE_MAP.get(tradeos_exchange, {})
+        return mapping.get("exchange", tradeos_exchange), mapping.get("segment", "CASH")
 
 
 class GrowwCapabilityRegistry:

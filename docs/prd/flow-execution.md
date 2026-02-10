@@ -22,7 +22,7 @@ This document describes the backend execution engine that runs Flow workflows.
 │                        ┌───────┴───────┐                           │
 │                        │               │                           │
 │                 ┌──────▼──────┐ ┌─────▼──────┐                    │
-│                 │ Workflow    │ │ OpenAlgo   │                    │
+│                 │ Workflow    │ │ TradeOS   │                    │
 │                 │ Context     │ │ Client     │                    │
 │                 └─────────────┘ └────────────┘                    │
 └─────────────────────────────────────────────────────────────────────┘
@@ -35,7 +35,7 @@ This document describes the backend execution engine that runs Flow workflows.
 ```
 services/
 ├── flow_executor_service.py    # Main execution engine (~1700 lines)
-├── flow_openalgo_client.py     # OpenAlgo API wrapper (~500 lines)
+├── flow_tradeos_client.py     # TradeOS API wrapper (~500 lines)
 └── flow_scheduler.py           # APScheduler integration
 ```
 
@@ -45,7 +45,7 @@ services/
 |-------|---------|
 | `WorkflowContext` | Maintains execution state and variables |
 | `NodeExecutor` | Executes individual node operations |
-| `FlowOpenAlgoClient` | Wraps OpenAlgo internal APIs |
+| `FlowTradeOSClient` | Wraps TradeOS internal APIs |
 
 ## WorkflowContext
 
@@ -146,7 +146,7 @@ Executes individual node operations.
 
 ```python
 class NodeExecutor:
-    def __init__(self, client: FlowOpenAlgoClient, context: WorkflowContext, logs: list):
+    def __init__(self, client: FlowTradeOSClient, context: WorkflowContext, logs: list):
         self.client = client
         self.context = context
         self.logs = logs
@@ -458,8 +458,8 @@ def execute_workflow(
     context = WorkflowContext(webhook_data=webhook_data)
     logs = []
 
-    # 3. Create executor with OpenAlgo client
-    client = FlowOpenAlgoClient(api_key)
+    # 3. Create executor with TradeOS client
+    client = FlowTradeOSClient(api_key)
     executor = NodeExecutor(client, context, logs)
 
     # 4. Build edge maps for traversal
@@ -635,12 +635,12 @@ def execute_node_chain(
         )
 ```
 
-## FlowOpenAlgoClient
+## FlowTradeOSClient
 
-Wraps internal OpenAlgo APIs.
+Wraps internal TradeOS APIs.
 
 ```python
-class FlowOpenAlgoClient:
+class FlowTradeOSClient:
     def __init__(self, api_key: str):
         self.api_key = api_key
 

@@ -1,6 +1,6 @@
 from openalgo import api
 
-print("🔁 OpenAlgo Python Bot is running.")
+print("🔁 TradeOS Python Bot is running.")
 
 # ------------------------------------------
 # Initialize API client

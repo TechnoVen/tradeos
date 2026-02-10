@@ -42,7 +42,7 @@ Custom Domain:  POST https://<your-custom-domain>/api/v1/quotes
 
 | Parameter | Description | Mandatory/Optional | Default Value |
 |-----------|-------------|-------------------|---------------|
-| apikey | Your OpenAlgo API key | Mandatory | - |
+| apikey | Your TradeOS API key | Mandatory | - |
 | symbol | Trading symbol | Mandatory | - |
 | exchange | Exchange code: NSE, BSE, NFO, BFO, CDS, BCD, MCX | Mandatory | - |
 
@@ -69,7 +69,7 @@ Custom Domain:  POST https://<your-custom-domain>/api/v1/quotes
 ## Notes
 
 - Quotes are **real-time** and refresh with each trade
-- For **F&O symbols**, use the OpenAlgo standard format (e.g., NIFTY30JAN25FUT)
+- For **F&O symbols**, use the TradeOS standard format (e.g., NIFTY30JAN25FUT)
 - For **multiple symbols**, use the [MultiQuotes](./multiquotes.md) endpoint
 - The **bid/ask** spread indicates liquidity
 

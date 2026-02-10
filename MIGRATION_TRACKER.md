@@ -1,4 +1,4 @@
-# OpenAlgo v2.0 Migration Tracker
+# TradeOS v2.0 Migration Tracker
 
 > **Last Updated**: 2026-01-12
 > **Status**: Phase 7 Complete ✓
@@ -169,7 +169,7 @@ All broker TOTP forms are handled by a single configurable component: `pages/Bro
 |-----------------|-----------------|--------|
 | `index.html` | `pages/Home.tsx` | [x] Complete |
 | `download.html` | `pages/Download.tsx` | [x] Complete |
-| `faq.html` | (External: docs.openalgo.in) | [x] N/A |
+| `faq.html` | (External: docs.tradeos.in) | [x] N/A |
 | `404.html` | `pages/NotFound.tsx` | [x] Complete |
 | `500.html` | `pages/ServerError.tsx` | [x] Complete |
 
@@ -346,7 +346,7 @@ lucide-react: latest
 - [x] Metrics cards: Current MTM, Max MTM, Min MTM, Max Drawdown
 - [x] Screenshot functionality with html2canvas-pro (oklch support)
 - [x] Dark/Light theme support for chart
-- [x] OpenAlgo watermark on chart
+- [x] TradeOS watermark on chart
 
 ### WebSocket & Market Data
 - [x] WebSocketTest.tsx - Market data streaming test page
@@ -663,7 +663,7 @@ frontend/
 
 ### Modified Files
 ```
-openalgo/
+tradeos/
 ├── app.py                  # Register react_bp, CSRF exemptions
 ├── blueprints/
 │   ├── analyzer.py         # /analyzer/api/data endpoint (Phase 4)

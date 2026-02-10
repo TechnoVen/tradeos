@@ -4,10 +4,10 @@ import pytz
 from apscheduler.schedulers.background import BackgroundScheduler
 from openalgo import api
 
-print("🔁 OpenAlgo Python Bot is running.")
+print("🔁 TradeOS Python Bot is running.")
 
 # ===============================
-# OpenAlgo Client
+# TradeOS Client
 # ===============================
 client = api(
     api_key="83ad96143dd5081d033abcfd20e9108daee5708fbea404121a762bed1e498dd0",

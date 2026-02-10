@@ -1,4 +1,4 @@
-# Mapping OpenAlgo API Request https://openalgo.in/docs
+# Mapping TradeOS API Request https://tradeos.io/docs
 # Mapping Dhan Sandbox Margin API https://dhanhq.co/docs/v2/funds/
 
 from broker.dhan_sandbox.mapping.transform_data import (
@@ -14,12 +14,12 @@ logger = get_logger(__name__)
 
 def transform_margin_position(position, client_id):
     """
-    Transform a single OpenAlgo margin position to Dhan Sandbox margin format.
+    Transform a single TradeOS margin position to Dhan Sandbox margin format.
 
     Note: Dhan Sandbox margin calculator API accepts only one order at a time, not a batch.
 
     Args:
-        position: Position in OpenAlgo format
+        position: Position in TradeOS format
         client_id: Dhan client ID
 
     Returns:
@@ -66,9 +66,9 @@ def transform_margin_position(position, client_id):
 
 def map_product_type_for_margin(product):
     """
-    Maps OpenAlgo product type to Dhan Sandbox product type for margin calculation.
+    Maps TradeOS product type to Dhan Sandbox product type for margin calculation.
 
-    OpenAlgo: CNC, NRML, MIS
+    TradeOS: CNC, NRML, MIS
     Dhan Sandbox: CNC, MARGIN, INTRADAY, MTF, CO, BO
     """
     product_type_mapping = {
@@ -81,7 +81,7 @@ def map_product_type_for_margin(product):
 
 def parse_margin_response(response_data):
     """
-    Parse Dhan Sandbox margin response to OpenAlgo standard format.
+    Parse Dhan Sandbox margin response to TradeOS standard format.
 
     Args:
         response_data: Raw response from Dhan Sandbox API

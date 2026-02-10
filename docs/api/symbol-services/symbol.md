@@ -79,8 +79,8 @@ Custom Domain:  POST https://<your-custom-domain>/api/v1/symbol
 
 | Parameter | Description | Mandatory/Optional | Default Value |
 |-----------|-------------|-------------------|---------------|
-| apikey | Your OpenAlgo API key | Mandatory | - |
-| symbol | Trading symbol in OpenAlgo format | Mandatory | - |
+| apikey | Your TradeOS API key | Mandatory | - |
+| symbol | Trading symbol in TradeOS format | Mandatory | - |
 | exchange | Exchange code: NSE, BSE, NFO, BFO, CDS, BCD, MCX | Mandatory | - |
 
 ## Response Fields
@@ -96,9 +96,9 @@ Custom Domain:  POST https://<your-custom-domain>/api/v1/symbol
 |-------|------|-------------|
 | id | number | Internal symbol ID |
 | name | string | Symbol name/underlying |
-| symbol | string | OpenAlgo standard symbol |
+| symbol | string | TradeOS standard symbol |
 | brsymbol | string | Broker-specific symbol |
-| exchange | string | OpenAlgo exchange code |
+| exchange | string | TradeOS exchange code |
 | brexchange | string | Broker-specific exchange code |
 | instrumenttype | string | Instrument type (EQ, FUT, CE, PE) |
 | expiry | string | Expiry date for F&O (DD-MMM-YY) |

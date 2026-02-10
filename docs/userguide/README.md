@@ -1,6 +1,6 @@
-# OpenAlgo User Guide
+# TradeOS User Guide
 
-Welcome to the official OpenAlgo User Guide - your comprehensive resource for mastering algorithmic trading with OpenAlgo.
+Welcome to the official TradeOS User Guide - your comprehensive resource for mastering algorithmic trading with TradeOS.
 
 ## What You'll Learn
 
@@ -9,7 +9,7 @@ This guide takes you from zero to automated trading, covering everything from ba
 ## Guide Structure
 
 ### Getting Started (Modules 01-05)
-- [01 - What is OpenAlgo](./01-what-is-openalgo/README.md)
+- [01 - What is TradeOS](./01-what-is-tradeos/README.md)
 - [02 - Key Concepts](./02-key-concepts/README.md)
 - [03 - System Requirements](./03-system-requirements/README.md)
 - [04 - Installation Guide](./04-installation/README.md)
@@ -59,8 +59,8 @@ This guide takes you from zero to automated trading, covering everything from ba
 
 | I want to... | Go to |
 |--------------|-------|
-| Understand what OpenAlgo does | [Module 01](./01-what-is-openalgo/README.md) |
-| Install OpenAlgo | [Module 04](./04-installation/README.md) |
+| Understand what TradeOS does | [Module 01](./01-what-is-tradeos/README.md) |
+| Install TradeOS | [Module 04](./04-installation/README.md) |
 | Connect my broker | [Module 06](./06-broker-connection/README.md) |
 | Place my first order | [Module 10](./10-placing-first-order/README.md) |
 | Test without real money | [Module 15](./15-analyzer-mode/README.md) |
@@ -72,14 +72,14 @@ This guide takes you from zero to automated trading, covering everything from ba
 ## Additional Resources
 
 - **Developer Documentation**: See `/design` folder for technical architecture
-- **Official Docs**: [docs.openalgo.in](https://docs.openalgo.in)
-- **Community**: [Discord](https://www.openalgo.in/discord)
-- **Video Tutorials**: [YouTube](https://www.youtube.com/@openalgo)
+- **Official Docs**: [docs.tradeos.io](https://docs.tradeos.io)
+- **Community**: [Discord](https://www.tradeos.io/discord)
+- **Video Tutorials**: [YouTube](https://www.youtube.com/@tradeos)
 
 ## Support
 
 If you encounter issues:
 1. Check [Troubleshooting](./29-troubleshooting/README.md)
 2. Read [FAQs](./30-faqs/README.md)
-3. Ask on [Discord](https://www.openalgo.in/discord)
-4. Open a [GitHub Issue](https://github.com/marketcalls/openalgo/issues)
+3. Ask on [Discord](https://www.tradeos.io/discord)
+4. Open a [GitHub Issue](https://github.com/TechnoVen/tradeos/issues)

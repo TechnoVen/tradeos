@@ -1,16 +1,16 @@
-# 01 - What is OpenAlgo?
+# 01 - What is TradeOS?
 
 ## Introduction
 
-**OpenAlgo** is a free, open-source algorithmic trading platform that bridges your trading ideas with execution. Built with Python Flask and a modern React frontend, it provides a unified API layer across 24+ Indian brokers, enabling seamless automation from TradingView, Amibroker, Python scripts, Excel, and AI agents.
+**TradeOS** is a free, open-source algorithmic trading platform that bridges your trading ideas with execution. Built with Python Flask and a modern React frontend, it provides a unified API layer across 24+ Indian brokers, enabling seamless automation from TradingView, Amibroker, Python scripts, Excel, and AI agents.
 
-**Website**: [https://openalgo.in](https://openalgo.in)
-**GitHub**: [https://github.com/marketcalls/openalgo](https://github.com/marketcalls/openalgo)
-**Documentation**: [https://docs.openalgo.in](https://docs.openalgo.in)
+**Website**: [https://tradeos.io](https://tradeos.io)
+**GitHub**: [https://github.com/TechnoVen/tradeos](https://github.com/TechnoVen/tradeos)
+**Documentation**: [https://docs.tradeos.io](https://docs.tradeos.io)
 
-## The Problem OpenAlgo Solves
+## The Problem TradeOS Solves
 
-### Before OpenAlgo
+### Before TradeOS
 
 ```
 You see a buy signal on TradingView
@@ -26,19 +26,19 @@ You click buy
 Signal is 2 minutes old by now!
 ```
 
-### With OpenAlgo
+### With TradeOS
 
 ```
 TradingView sends a signal
         ↓
-OpenAlgo receives it instantly
+TradeOS receives it instantly
         ↓
 Order placed with your broker
         ↓
 All in under 1 second!
 ```
 
-## Who is OpenAlgo For?
+## Who is TradeOS For?
 
 ### Retail Traders
 - Tired of manually placing orders
@@ -82,7 +82,7 @@ All in under 1 second!
 | Feature | Description |
 |---------|-------------|
 | **Flow Visual Builder** | No-code strategy builder with drag-and-drop nodes |
-| **Python Strategy Hosting** | Host and schedule Python strategies directly in OpenAlgo |
+| **Python Strategy Hosting** | Host and schedule Python strategies directly in TradeOS |
 | **TradingView Integration** | Pine Script alerts to automatic orders via webhooks |
 | **Amibroker Integration** | AFL strategies with direct API communication |
 | **ChartInk Integration** | Stock scanner alerts to automated trades |
@@ -131,7 +131,7 @@ All in under 1 second!
 │                              │                                           │
 │                              ▼                                           │
 │  ┌───────────────────────────────────────────────────────────────────┐  │
-│  │                         OpenAlgo Platform                          │  │
+│  │                         TradeOS Platform                          │  │
 │  │                                                                    │  │
 │  │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐               │  │
 │  │  │  REST API   │  │  WebSocket  │  │    Flow     │               │  │
@@ -164,7 +164,7 @@ All in under 1 second!
 | **Banks** | ICICI Direct, HDFC Securities, Kotak Neo |
 | **Others** | 5paisa, Finvasia, Flattrade, Firstock, and more |
 
-**Benefit**: Switch brokers without changing your strategy code - OpenAlgo's unified API handles the translation.
+**Benefit**: Switch brokers without changing your strategy code - TradeOS's unified API handles the translation.
 
 ## Supported Exchanges
 
@@ -251,9 +251,9 @@ Test strategies with ₹1 Crore sandbox capital:
 - Market depth (5/20 levels)
 - Order status updates
 
-## What OpenAlgo is NOT
+## What TradeOS is NOT
 
-Let's be clear about what OpenAlgo doesn't do:
+Let's be clear about what TradeOS doesn't do:
 
 | Misconception | Reality |
 |---------------|---------|
@@ -277,7 +277,7 @@ Let's be clear about what OpenAlgo doesn't do:
 
 Ready to begin? Here's your path:
 
-1. **Next**: Learn [Why Build with OpenAlgo](../02-why-build-with-openalgo/README.md)
+1. **Next**: Learn [Why Build with TradeOS](../02-why-build-with-tradeos/README.md)
 2. Understand [Key Concepts](../03-key-concepts/README.md)
 3. Check [System Requirements](../03-system-requirements/README.md)
 4. Follow [Installation Guide](../04-installation/README.md)
@@ -288,14 +288,14 @@ Ready to begin? Here's your path:
 
 | Resource | Link |
 |----------|------|
-| **GitHub** | [github.com/marketcalls/openalgo](https://github.com/marketcalls/openalgo) |
-| **Documentation** | [docs.openalgo.in](https://docs.openalgo.in) |
+| **GitHub** | [github.com/TechnoVen/tradeos](https://github.com/TechnoVen/tradeos) |
+| **Documentation** | [docs.tradeos.io](https://docs.tradeos.io) |
 | **API Reference** | [/api/docs](http://localhost:5000/api/docs) (after installation) |
 | **Discord Community** | Join for support and discussions |
 
 ## Summary
 
-| Aspect | OpenAlgo |
+| Aspect | TradeOS |
 |--------|----------|
 | **Cost** | Free (Open Source, MIT License) |
 | **Brokers** | 24+ Indian brokers |
@@ -311,4 +311,4 @@ Ready to begin? Here's your path:
 
 ---
 
-**Next**: [02 - Why Build with OpenAlgo](../02-why-build-with-openalgo/README.md) - Understand the value proposition.
+**Next**: [02 - Why Build with TradeOS](../02-why-build-with-tradeos/README.md) - Understand the value proposition.

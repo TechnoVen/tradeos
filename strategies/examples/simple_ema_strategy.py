@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """
 Simple EMA Crossover Strategy Example
-This strategy demonstrates how to integrate with OpenAlgo API
+This strategy demonstrates how to integrate with TradeOS API
 """
 from openalgo import api
 import pandas as pd
@@ -11,17 +11,17 @@ import threading
 from datetime import datetime, timedelta
 import os
 
-# Get API key from openalgo portal
-api_key = os.getenv('OPENALGO_APIKEY')
+# Get API key from tradeos portal
+api_key = os.getenv('TRADEOS_APIKEY')
 
 if not api_key:
-    print("Error: OPENALGO_APIKEY environment variable not set")
+    print("Error: TRADEOS_APIKEY environment variable not set")
     exit(1)
 
 
 # Set the strategy details and trading parameters
 strategy = "EMA Crossover Python"
-symbol = 'NHPC'  # OpenAlgo Symbol
+symbol = 'NHPC'  # TradeOS Symbol
 exchange = "NSE"
 product = "MIS"
 quantity = 1
@@ -78,7 +78,7 @@ def ema_strategy():
             end_date = datetime.now().strftime("%Y-%m-%d")
             start_date = (datetime.now() - timedelta(days=7)).strftime("%Y-%m-%d")
 
-            # Fetch 1-minute historical data using OpenAlgo
+            # Fetch 1-minute historical data using TradeOS
             df = client.history(
                 symbol=symbol,
                 exchange=exchange,

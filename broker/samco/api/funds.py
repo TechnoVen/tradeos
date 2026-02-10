@@ -40,7 +40,7 @@ def get_margin_data(auth_token):
         equity_used = float(equity_limit.get("marginUsed", 0) or 0)
         commodity_used = float(commodity_limit.get("marginUsed", 0) or 0)
 
-        # Map Samco fields to OpenAlgo standard format
+        # Map Samco fields to TradeOS standard format
         filtered_data = {
             "availablecash": f"{equity_available + commodity_available:.2f}",
             "collateral": "{:.2f}".format(

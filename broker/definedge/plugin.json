@@ -1,8 +1,10 @@
 {
     "Plugin Name": "DefinedGe Securities",
-    "Plugin URI": "https://openalgo.in",
-    "Description": "DefinedGe Securities OpenAlgo Plugin",
+    "Plugin URI": "https://github.com/TechnoVen/tradeos",
+    "Description": "DefinedGe Securities TradeOS Plugin",
     "Version": "1.0",
-    "Author": "OpenAlgo Team",
-    "Author URI": "https://openalgo.in"
+    "Author": "TradeOS Team (originally OpenAlgo Team)",
+    "Author URI": "https://github.com/TechnoVen/tradeos",
+    "region": "IN",
+    "enabled": false
 }

@@ -1,1 +1,1 @@
-OpenAlgo Go SDK Examples
+TradeOS Go SDK Examples

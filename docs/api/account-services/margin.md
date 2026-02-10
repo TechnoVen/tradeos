@@ -53,7 +53,7 @@ Custom Domain:  POST https://<your-custom-domain>/api/v1/margin
 
 | Parameter | Description | Mandatory/Optional | Default Value |
 |-----------|-------------|-------------------|---------------|
-| apikey | Your OpenAlgo API key | Mandatory | - |
+| apikey | Your TradeOS API key | Mandatory | - |
 | positions | Array of position objects (max 50) | Mandatory | - |
 
 ### Position Object Fields

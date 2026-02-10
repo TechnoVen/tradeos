@@ -1,7 +1,7 @@
 # Python Strategy Management System
 
 ## Overview
-A complete web-based strategy hosting and scheduling system for OpenAlgo, accessible at `/python`.
+A complete web-based strategy hosting and scheduling system for TradeOS, accessible at `/python`.
 
 ## Features
 - **Upload & Manage**: Upload Python strategy scripts through web interface
@@ -18,7 +18,7 @@ A complete web-based strategy hosting and scheduling system for OpenAlgo, access
 pip install apscheduler psutil
 ```
 
-2. The system is already integrated into OpenAlgo. Access it at:
+2. The system is already integrated into TradeOS. Access it at:
 ```
 http://localhost:5000/python
 ```
@@ -62,7 +62,7 @@ from datetime import datetime
 # Get parameters from environment
 SYMBOL = os.getenv('SYMBOL', 'RELIANCE')
 EXCHANGE = os.getenv('EXCHANGE', 'NSE')
-API_KEY = os.getenv('OPENALGO_API_KEY', '')
+API_KEY = os.getenv('TRADEOS_API_KEY', '')
 
 def main():
     print(f"Strategy started at {datetime.now()}")
@@ -74,7 +74,7 @@ def main():
             # 1. Fetch market data
             # 2. Calculate indicators
             # 3. Generate signals
-            # 4. Place orders via OpenAlgo API
+            # 4. Place orders via TradeOS API
             
             print(f"[{datetime.now()}] Running strategy...")
             time.sleep(60)  # Check every minute
@@ -96,8 +96,8 @@ The following environment variables are automatically set for each strategy:
 
 - `STRATEGY_ID`: Unique identifier for the strategy
 - `STRATEGY_NAME`: Name of the strategy
-- `OPENALGO_API_KEY`: API key from .env file
-- `OPENALGO_HOST`: OpenAlgo host URL
+- `TRADEOS_API_KEY`: API key from .env file
+- `TRADEOS_HOST`: TradeOS host URL
 - Plus any custom parameters you define
 
 ## Directory Structure
@@ -115,12 +115,12 @@ logs/
 
 ## API Integration
 
-Example of integrating with OpenAlgo API in your strategy:
+Example of integrating with TradeOS API in your strategy:
 
 ```python
 import requests
 
-class OpenAlgoAPI:
+class TradeOSAPI:
     def __init__(self, host, api_key):
         self.host = host
         self.api_key = api_key
@@ -172,6 +172,6 @@ Example: Start at 09:15, stop at 15:30, run Monday-Friday
 
 See `examples/simple_ema_strategy.py` for a complete working example that:
 - Implements EMA crossover logic
-- Integrates with OpenAlgo API
+- Integrates with TradeOS API
 - Handles errors gracefully
 - Uses environment parameters

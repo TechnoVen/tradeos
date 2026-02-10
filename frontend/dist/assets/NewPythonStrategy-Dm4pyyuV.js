@@ -1,6 +1,6 @@
 import{r,j as e}from"./vendor-react-CCyQGCED.js";import{B as d,s as l}from"./index-Bn2q-hwo.js";import{p as O}from"./python-strategy-CLpPH4Z8.js";import{A as U,a as Y}from"./alert-BPfLDnAZ.js";import{C as b,a as v,b as C,c as K,d as w}from"./card-XuTJg-eV.js";import{C as G,b as R,a as W}from"./collapsible-DcfHjv7p.js";import{I as x}from"./input-BTeh-sn5.js";import{L as m}from"./label-DdJ6eezO.js";import{b as $}from"./python-strategy-CJF1bPLS.js";import{N as q,I as H,aO as T,a_ as P,V}from"./vendor-icons-CCn_k3dF.js";import{a as X,L as Z}from"./vendor-router-Dzc1xxhr.js";import"./vendor-charts-l0_txfiz.js";import"./vendor-radix-CYVJEJRR.js";const A=`"""
-Example OpenAlgo Strategy
-This is a minimal example showing how to use the OpenAlgo Python SDK.
+Example TradeOS Strategy
+This is a minimal example showing how to use the TradeOS Python SDK.
 """
 
 import os
@@ -8,7 +8,7 @@ import time
 from openalgo import api
 
 # Get API key from environment variable
-API_KEY = os.getenv('OPENALGO_API_KEY')
+API_KEY = os.getenv('TRADEOS_API_KEY')
 
 # Initialize the API client
 client = api(

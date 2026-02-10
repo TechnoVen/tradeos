@@ -50,7 +50,7 @@ def sandbox_place_order(
 
     Args:
         order_data: Validated order data
-        api_key: OpenAlgo API key
+        api_key: TradeOS API key
         original_data: Original request data for logging
 
     Returns:
@@ -709,7 +709,7 @@ def sandbox_get_pnl_symbols(
     Returns unrealized P&L, today's realized P&L, and total P&L for today per symbol.
 
     Args:
-        api_key: OpenAlgo API key
+        api_key: TradeOS API key
         original_data: Original request data
 
     Returns:

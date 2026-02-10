@@ -19,7 +19,7 @@ logger = get_logger(__name__)
 # FNO exchanges that have derivatives
 FNO_EXCHANGES = {"NFO", "BFO", "MCX", "CDS"}
 
-# Regex pattern to extract underlying from OpenAlgo symbol format
+# Regex pattern to extract underlying from TradeOS symbol format
 # Format: [BaseSymbol][DDMMMYY][StrikePrice][CE/PE] or [BaseSymbol][DDMMMYY]FUT
 # Examples: NIFTY28MAR2420800CE, BANKNIFTY24APR24FUT, CRUDEOIL17APR246750CE
 _UNDERLYING_PATTERN = re.compile(
@@ -32,14 +32,14 @@ _UNDERLYING_PATTERN = re.compile(
 
 def extract_underlying_from_symbol(symbol: str, exchange: str) -> str | None:
     """
-    Extract underlying name from OpenAlgo symbol format.
+    Extract underlying name from TradeOS symbol format.
 
-    OpenAlgo symbol formats:
+    TradeOS symbol formats:
     - Futures: [BaseSymbol][DDMMMYY]FUT (e.g., BANKNIFTY24APR24FUT -> BANKNIFTY)
     - Options: [BaseSymbol][DDMMMYY][Strike][CE/PE] (e.g., NIFTY28MAR2420800CE -> NIFTY)
 
     Args:
-        symbol: OpenAlgo formatted symbol
+        symbol: TradeOS formatted symbol
         exchange: Exchange code (NFO, BFO, MCX, CDS, etc.)
 
     Returns:
@@ -103,7 +103,7 @@ class SymbolData:
     lotsize: int | None = None
     instrumenttype: str | None = None
     tick_size: float | None = None
-    underlying: str | None = None  # Extracted from OpenAlgo symbol format for F&O
+    underlying: str | None = None  # Extracted from TradeOS symbol format for F&O
 
 
 class BrokerSymbolCache:
@@ -164,7 +164,7 @@ class BrokerSymbolCache:
 
             # Build in-memory structures
             for sym in symbols:
-                # Extract underlying from OpenAlgo symbol format for FNO exchanges
+                # Extract underlying from TradeOS symbol format for FNO exchanges
                 underlying = None
                 if sym.exchange in FNO_EXCHANGES:
                     underlying = extract_underlying_from_symbol(sym.symbol, sym.exchange)
@@ -300,7 +300,7 @@ class BrokerSymbolCache:
         return None
 
     def get_oa_symbol(self, brsymbol: str, exchange: str) -> str | None:
-        """Get OpenAlgo symbol for broker symbol and exchange - O(1) lookup"""
+        """Get TradeOS symbol for broker symbol and exchange - O(1) lookup"""
         self.stats.hits += 1
         key = (brsymbol, exchange)
         if key in self.by_brsymbol_exchange:
@@ -494,7 +494,7 @@ class BrokerSymbolCache:
             symbols_to_search = self.symbols.values()
 
         for symbol_data in symbols_to_search:
-            # Underlying filter (use extracted underlying from OpenAlgo symbol format)
+            # Underlying filter (use extracted underlying from TradeOS symbol format)
             if underlying_upper and (
                 not symbol_data.underlying or symbol_data.underlying != underlying_upper
             ):
@@ -667,7 +667,7 @@ def get_br_symbol(symbol: str, exchange: str) -> str | None:
 
 def get_oa_symbol(brsymbol: str, exchange: str) -> str | None:
     """
-    Get OpenAlgo symbol for a given broker symbol and exchange
+    Get TradeOS symbol for a given broker symbol and exchange
     """
     cache = get_cache()
 
@@ -759,7 +759,7 @@ def get_br_symbol_dbquery(symbol: str, exchange: str) -> str | None:
 
 
 def get_oa_symbol_dbquery(brsymbol: str, exchange: str) -> str | None:
-    """Query database for OpenAlgo symbol"""
+    """Query database for TradeOS symbol"""
     try:
         from database.symbol import SymToken
 

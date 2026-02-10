@@ -60,7 +60,7 @@ Custom Domain:  POST https://<your-custom-domain>/api/v1/analyzertoggle
 
 | Parameter | Description | Mandatory/Optional | Default Value |
 |-----------|-------------|-------------------|---------------|
-| apikey | Your OpenAlgo API key | Mandatory | - |
+| apikey | Your TradeOS API key | Mandatory | - |
 | mode | true to enable analyzer, false to disable | Mandatory | - |
 
 ## Response Fields

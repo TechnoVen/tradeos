@@ -184,7 +184,7 @@ def download_csv_index_data(exchange_name):
 
 def process_motilal_index_csv(df, exchange_name):
     """
-    Processes the Motilal Index CSV file to fit the OpenAlgo database schema.
+    Processes the Motilal Index CSV file to fit the TradeOS database schema.
 
     Args:
         df (pd.DataFrame): Raw DataFrame from Motilal Index API
@@ -204,7 +204,7 @@ def process_motilal_index_csv(df, exchange_name):
     df["name"] = df["symbol"]
     df["brsymbol"] = df["symbol"]
 
-    # Map exchange to OpenAlgo format with _INDEX suffix
+    # Map exchange to TradeOS format with _INDEX suffix
     if exchange_name == "NSE":
         df["exchange"] = "NSE_INDEX"
     elif exchange_name == "BSE":
@@ -224,7 +224,7 @@ def process_motilal_index_csv(df, exchange_name):
     # Convert token to string
     df["token"] = df["token"].astype(str)
 
-    # Standardize index names to match OpenAlgo format
+    # Standardize index names to match TradeOS format
     df["symbol"] = df["symbol"].replace(
         {
             "Nifty 50": "NIFTY",
@@ -282,7 +282,7 @@ def process_motilal_index_csv(df, exchange_name):
 
 def process_motilal_csv(df, exchange_name):
     """
-    Processes the Motilal CSV file to fit the OpenAlgo database schema.
+    Processes the Motilal CSV file to fit the TradeOS database schema.
 
     Args:
         df (pd.DataFrame): Raw DataFrame from Motilal API
@@ -293,7 +293,7 @@ def process_motilal_csv(df, exchange_name):
     """
     logger.info(f"Processing Motilal CSV Data for {exchange_name}")
 
-    # Rename columns based on Motilal API format to OpenAlgo schema
+    # Rename columns based on Motilal API format to TradeOS schema
     df = df.rename(
         columns={
             "scripcode": "token",
@@ -311,7 +311,7 @@ def process_motilal_csv(df, exchange_name):
     # Add broker symbol and exchange (keep original)
     df["brsymbol"] = df["symbol"]
 
-    # Map Motilal exchange names to OpenAlgo exchange names
+    # Map Motilal exchange names to TradeOS exchange names
     exchange_map = {
         "NSE": "NSE",
         "BSE": "BSE",
@@ -359,7 +359,7 @@ def process_motilal_csv(df, exchange_name):
     df.loc[df["optiontype"] == "CE", "instrumenttype"] = "CE"
     df.loc[df["optiontype"] == "PE", "instrumenttype"] = "PE"
 
-    # Format symbols according to OpenAlgo standards
+    # Format symbols according to TradeOS standards
 
     # For Index instruments, update exchange
     df.loc[

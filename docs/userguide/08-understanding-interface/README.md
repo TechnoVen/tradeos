@@ -2,7 +2,7 @@
 
 ## Introduction
 
-OpenAlgo's interface is designed to be intuitive while providing powerful functionality. This guide helps you navigate and understand each section.
+TradeOS's interface is designed to be intuitive while providing powerful functionality. This guide helps you navigate and understand each section.
 
 ## Main Navigation
 
@@ -10,7 +10,7 @@ OpenAlgo's interface is designed to be intuitive while providing powerful functi
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
-│  🔷 OpenAlgo          [Search...]       🔔 Notifications    👤 Admin  ▾    │
+│  🔷 TradeOS          [Search...]       🔔 Notifications    👤 Admin  ▾    │
 └─────────────────────────────────────────────────────────────────────────────┘
      │                       │                    │                │
      Logo                  Search            Alerts          Profile Menu

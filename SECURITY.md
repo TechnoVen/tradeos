@@ -2,7 +2,7 @@
 
 ## Our Commitment
 
-OpenAlgo handles sensitive financial operations and broker credentials. We take security seriously and appreciate responsible disclosure of vulnerabilities.
+TradeOS handles sensitive financial operations and broker credentials. We take security seriously and appreciate responsible disclosure of vulnerabilities.
 
 ## Supported Versions
 
@@ -16,7 +16,7 @@ We recommend always running the latest version.
 
 ## Reporting a Vulnerability
 
-**Email:** rajandran@openalgo.in
+**Email:** rajandran@tradeos.in
 
 **Please include:**
 - Description of the vulnerability
@@ -85,6 +85,6 @@ We acknowledge security researchers who responsibly disclose vulnerabilities. Wi
 
 ## Contact
 
-- **Security issues:** rajandran@openalgo.in
-- **General issues:** https://github.com/marketcalls/openalgo/issues
-- **Documentation:** https://docs.openalgo.in
+- **Security issues:** rajandran@tradeos.in
+- **General issues:** https://github.com/TechnoVen/tradeos/issues
+- **Documentation:** https://docs.tradeos.in

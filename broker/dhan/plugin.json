@@ -1,8 +1,10 @@
 {
     "Plugin Name": "dhan",
-    "Plugin URI": "https://openalgo.in",
-    "Description": "Dhan OpenAlgo Plugin",
+    "Plugin URI": "https://github.com/TechnoVen/tradeos",
+    "Description": "Dhan TradeOS Plugin",
     "Version": "1.0",
     "Author": "Rajandran R",
-    "Author URI": "https://openalgo.in"
+    "Author URI": "https://github.com/TechnoVen/tradeos",
+    "region": "IN",
+    "enabled": false
 }

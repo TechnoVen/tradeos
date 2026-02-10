@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# OpenAlgo Docker Multi-Instance Installation with Custom SSL
+# TradeOS Docker Multi-Instance Installation with Custom SSL
 # Supports deploying multiple instances with existing SSL certificates (including Wildcards)
 
 # Colors for output
@@ -11,7 +11,7 @@ YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
 # Base Configuration
-INSTALL_BASE="/opt/openalgo"
+INSTALL_BASE="/opt/tradeos"
 START_FLASK_PORT=5000
 START_WS_PORT=8765
 
@@ -164,7 +164,7 @@ fi
 log "\n=== Configuration ===" "$BLUE"
 
 # 0. Git Repository Selection
-DEFAULT_REPO="https://github.com/marketcalls/openalgo.git"
+DEFAULT_REPO="https://github.com/TechnoVen/tradeos.git"
 read -p "Enter Git Repository URL [Default: $DEFAULT_REPO]: " REPO_URL
 REPO_URL=${REPO_URL:-$DEFAULT_REPO}
 log "Using Repository: $REPO_URL" "$GREEN"
@@ -722,7 +722,7 @@ for i in "${!CONF_DOMAINS[@]}"; do
     FLASK_PORT=${PORTS[0]}
     WS_PORT=${PORTS[1]}
     SANITIZED_NAME=$(sanitize_domain "$DOMAIN")
-    PROJECT_NAME="openalgo-${SANITIZED_NAME}"
+    PROJECT_NAME="tradeos-${SANITIZED_NAME}"
 
     log " -> Ports: Flask=$FLASK_PORT, WS=$WS_PORT" "$GREEN"
     log " -> Dir: $INSTANCE_DIR" "$GREEN"
@@ -852,7 +852,7 @@ for i in "${!CONF_DOMAINS[@]}"; do
     # 6. Docker Compose
     cat <<EOF > "$INSTANCE_DIR/docker-compose.yaml"
 services:
-  openalgo:
+  tradeos:
     image: ${PROJECT_NAME}:latest
     build:
       context: .
@@ -862,11 +862,11 @@ services:
       - "127.0.0.1:${FLASK_PORT}:5000"
       - "127.0.0.1:${WS_PORT}:8765"
     volumes:
-      - openalgo_db:/app/db
-      - openalgo_log:/app/log
-      - openalgo_strategies:/app/strategies
-      - openalgo_keys:/app/keys
-      - openalgo_tmp:/app/tmp
+      - tradeos_db:/app/db
+      - tradeos_log:/app/log
+      - tradeos_strategies:/app/strategies
+      - tradeos_keys:/app/keys
+      - tradeos_tmp:/app/tmp
       - ./.env:/app/.env:ro
     environment:
       - FLASK_ENV=production
@@ -874,7 +874,7 @@ services:
       - APP_MODE=standalone
       - TZ=Asia/Kolkata
       # Resource limits auto-calculated for multi-instance deployment
-      # See: https://github.com/marketcalls/openalgo/issues/822
+      # See: https://github.com/TechnoVen/tradeos/issues/822
       - OPENBLAS_NUM_THREADS=${THREAD_LIMIT}
       - OMP_NUM_THREADS=${THREAD_LIMIT}
       - MKL_NUM_THREADS=${THREAD_LIMIT}
@@ -891,26 +891,26 @@ services:
     restart: unless-stopped
 
 volumes:
-  openalgo_db:
+  tradeos_db:
     driver: local
-  openalgo_log:
+  tradeos_log:
     driver: local
-  openalgo_strategies:
+  tradeos_strategies:
     driver: local
-  openalgo_keys:
+  tradeos_keys:
     driver: local
-  openalgo_tmp:
+  tradeos_tmp:
     driver: local
 EOF
 
     # 7. Nginx Config
     cat <<EOF > "/etc/nginx/sites-available/$DOMAIN"
-upstream openalgo_flask_${SANITIZED_NAME} {
+upstream tradeos_flask_${SANITIZED_NAME} {
     server 127.0.0.1:${FLASK_PORT};
     keepalive 64;
 }
 
-upstream openalgo_websocket_${SANITIZED_NAME} {
+upstream tradeos_websocket_${SANITIZED_NAME} {
     server 127.0.0.1:${WS_PORT};
     keepalive 64;
 }
@@ -944,7 +944,7 @@ server {
 
     # Logic: WebSocket
     location = /ws {
-        proxy_pass http://openalgo_websocket_${SANITIZED_NAME};
+        proxy_pass http://tradeos_websocket_${SANITIZED_NAME};
         proxy_http_version 1.1;
         proxy_set_header Upgrade \$http_upgrade;
         proxy_set_header Connection "upgrade";
@@ -952,7 +952,7 @@ server {
         proxy_read_timeout 86400s;
     }
     location /ws/ {
-        proxy_pass http://openalgo_websocket_${SANITIZED_NAME}/;
+        proxy_pass http://tradeos_websocket_${SANITIZED_NAME}/;
         proxy_http_version 1.1;
         proxy_set_header Upgrade \$http_upgrade;
         proxy_set_header Connection "upgrade";
@@ -962,7 +962,7 @@ server {
 
     # Logic: Main App
     location / {
-        proxy_pass http://openalgo_flask_${SANITIZED_NAME};
+        proxy_pass http://tradeos_flask_${SANITIZED_NAME};
         proxy_http_version 1.1;
         proxy_read_timeout 300s;
         proxy_connect_timeout 300s;
@@ -1003,11 +1003,11 @@ check_status "Nginx reload failed"
 # Management Tool
 # -----------------
 
-cat <<'EOF' > /usr/local/bin/openalgo-ctl
+cat <<'EOF' > /usr/local/bin/tradeos-ctl
 #!/bin/bash
-# OpenAlgo Manager
+# TradeOS Manager
 
-INSTALL_BASE="/opt/openalgo"
+INSTALL_BASE="/opt/tradeos"
 
 cmd=$1
 target=$2
@@ -1028,7 +1028,7 @@ list_instances() {
 }
 
 usage() {
-    echo "Usage: openalgo-ctl <command> [domain]"
+    echo "Usage: tradeos-ctl <command> [domain]"
     echo "Commands:"
     echo "  list              - List all instances"
     echo "  restart <domain>  - Restart specific instance"
@@ -1075,16 +1075,16 @@ case "$cmd" in
 esac
 EOF
 
-chmod +x /usr/local/bin/openalgo-ctl
+chmod +x /usr/local/bin/tradeos-ctl
 
 
 log "\n==============================================" "$GREEN"
 log " INSTALLATION COMPLETE" "$GREEN"
 log "==============================================" "$GREEN"
-log "Management Command: openalgo-ctl" "$BLUE"
-log "  openalgo-ctl list" "$BLUE"
-log "  openalgo-ctl restart <domain.com>" "$BLUE"
-log "  openalgo-ctl logs <domain.com>" "$BLUE"
+log "Management Command: tradeos-ctl" "$BLUE"
+log "  tradeos-ctl list" "$BLUE"
+log "  tradeos-ctl restart <domain.com>" "$BLUE"
+log "  tradeos-ctl logs <domain.com>" "$BLUE"
 
 log "\n[IMPORTANT] CLOUD FIREWALL SETTINGS:" "$YELLOW"
 log "Ensure the following Inbound Ports are OPEN in your Azure NSG / AWS Security Group:" "$RED"

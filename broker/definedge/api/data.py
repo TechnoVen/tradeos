@@ -185,7 +185,7 @@ class BrokerData:
             if response.get("status") != "SUCCESS":
                 raise Exception(f"API returned status: {response.get('status', 'Unknown')}")
 
-            # Map Definedge response fields to OpenAlgo format
+            # Map Definedge response fields to TradeOS format
             # Definedge fields based on the documentation:
             # - best_bid_price1 -> bid
             # - best_ask_price1 -> ask
@@ -827,7 +827,7 @@ class BrokerData:
                 # For intraday intervals (minute data)
                 # Definedge returns timestamps in IST (Indian Standard Time)
                 # We need to localize them as IST and convert to UTC before converting to Unix epoch
-                # This ensures the OpenAlgo client interprets them correctly
+                # This ensures the TradeOS client interprets them correctly
                 # Localize as IST (the timestamps from Definedge are in IST)
                 df["timestamp"] = df["timestamp"].dt.tz_localize("Asia/Kolkata")
                 # Convert to UTC for storage as Unix epoch
@@ -857,7 +857,7 @@ class BrokerData:
                     .reset_index(drop=True)
                 )
 
-            # Reorder columns to match OpenAlgo format (timestamp should be 5th column)
+            # Reorder columns to match TradeOS format (timestamp should be 5th column)
             # Order: close, high, low, open, timestamp, volume, oi
             df = df[["close", "high", "low", "open", "timestamp", "volume", "oi"]]
 

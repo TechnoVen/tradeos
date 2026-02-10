@@ -115,12 +115,12 @@ def process_definedge_nse_csv(path):
     try:
         df = pd.read_csv(path)
 
-        # Map DefinedGe NSE columns to OpenAlgo schema
+        # Map DefinedGe NSE columns to TradeOS schema
         # Assuming DefinedGe uses standard format: Symbol, Token, Name, etc.
         processed_df = pd.DataFrame()
 
         if "Symbol" in df.columns:
-            processed_df["symbol"] = df["Symbol"] + "-EQ"  # OpenAlgo format
+            processed_df["symbol"] = df["Symbol"] + "-EQ"  # TradeOS format
             processed_df["brsymbol"] = df["Symbol"]  # DefinedGe format
 
         if "Token" in df.columns:
@@ -352,7 +352,7 @@ def process_definedge_allmaster_csv(path):
         processed_df["instrumenttype"] = df["InstrumentType"].fillna("EQ")
         processed_df["option_type"] = df["OptionType"].fillna("")
 
-        # Format symbols according to OpenAlgo standard
+        # Format symbols according to TradeOS standard
         processed_df["symbol"] = processed_df["brsymbol"].copy()
         processed_df["exchange"] = processed_df["brexchange"].copy()
 

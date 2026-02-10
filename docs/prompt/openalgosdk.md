@@ -1,23 +1,23 @@
 # Python
 
-To install the OpenAlgo Python library, use pip:
+To install the TradeOS Python library, use pip:
 
 ```bash
-pip install openalgo
+pip install tradeos
 ```
 
-### Get the OpenAlgo apikey
+### Get the TradeOS apikey
 
-Make Sure that your OpenAlgo Application is running. Login to OpenAlgo Application with valid credentials and get the OpenAlgo apikey
+Make Sure that your TradeOS Application is running. Login to TradeOS Application with valid credentials and get the TradeOS apikey
 
-For detailed function parameters refer to the [API Documentation](https://docs.openalgo.in/api-documentation/v1)
+For detailed function parameters refer to the [API Documentation](https://docs.tradeos.io/api-documentation/v1)
 
-### Getting Started with OpenAlgo
+### Getting Started with TradeOS
 
-First, import the `api` class from the OpenAlgo library and initialize it with your API key:
+First, import the `api` class from the TradeOS library and initialize it with your API key:
 
 ```python
-from openalgo import api
+from tradeos import api
 
 # Replace 'your_api_key_here' with your actual API key
 # Specify the host URL with your hosted domain or ngrok domain. 
@@ -26,16 +26,16 @@ client = api(api_key='your_api_key_here', host='http://127.0.0.1:5000')
 
 ```
 
-### Check OpenAlgo Version
+### Check TradeOS Version
 
 ```python
-import openalgo 
-openalgo.__version__
+import tradeos 
+tradeos.__version__
 ```
 
 ### Examples
 
-Please refer to the documentation on [order constants](https://docs.openalgo.in/api-documentation/v1/order-constants), and consult the API reference for details on optional parameters
+Please refer to the documentation on [order constants](https://docs.tradeos.io/api-documentation/v1/order-constants), and consult the API reference for details on optional parameters
 
 ### PlaceOrder example
 
@@ -1378,7 +1378,7 @@ Instruments **Response**
 
 ```python
 response = client.telegram(
-      username="<openalgo_loginid>",
+      username="<tradeos_loginid>",
       message="NIFTY crossed 26000!"
   )
 
@@ -1739,12 +1739,12 @@ Analyzer Toggle Response
 ### LTP Data (Streaming Websocket)
 
 ```python
-from openalgo import api
+from tradeos import api
 import time
 
-# Initialize OpenAlgo client
+# Initialize TradeOS client
 client = api(
-    api_key="your_api_key",                  # Replace with your actual OpenAlgo API key
+    api_key="your_api_key",                  # Replace with your actual TradeOS API key
     host="http://127.0.0.1:5000",            # REST API host
     ws_url="ws://127.0.0.1:8765"             # WebSocket host
 )
@@ -1776,12 +1776,12 @@ finally:
 ### Quotes (Streaming Websocket)
 
 ```python
-from openalgo import api
+from tradeos import api
 import time
 
-# Initialize OpenAlgo client
+# Initialize TradeOS client
 client = api(
-    api_key="your_api_key",                  # Replace with your actual OpenAlgo API key
+    api_key="your_api_key",                  # Replace with your actual TradeOS API key
     host="http://127.0.0.1:5000",            # REST API host
     ws_url="ws://127.0.0.1:8765"             # WebSocket host
 )
@@ -1813,12 +1813,12 @@ finally:
 ### Depth (Streaming Websocket)
 
 ```python
-from openalgo import api
+from tradeos import api
 import time
 
-# Initialize OpenAlgo client
+# Initialize TradeOS client
 client = api(
-    api_key="your_api_key",                  # Replace with your actual OpenAlgo API key
+    api_key="your_api_key",                  # Replace with your actual TradeOS API key
     host="http://127.0.0.1:5000",            # REST API host
     ws_url="ws://127.0.0.1:8765"             # WebSocket host
 )

@@ -1,4 +1,4 @@
-# OpenAlgo Developer Documentation Tracker
+# TradeOS Developer Documentation Tracker
 
 ## Progress Overview
 

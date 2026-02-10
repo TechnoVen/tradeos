@@ -1,6 +1,6 @@
 # Broker Factory Implementation
 
-This document describes the broker factory design that enables OpenAlgo to work with any of the 24+ supported brokers while maintaining a single common interface for the WebSocket proxy system. OpenAlgo allows one user to connect to one broker at a time, and the broker factory ensures consistent implementation across all supported brokers.
+This document describes the broker factory design that enables TradeOS to work with any of the 24+ supported brokers while maintaining a single common interface for the WebSocket proxy system. TradeOS allows one user to connect to one broker at a time, and the broker factory ensures consistent implementation across all supported brokers.
 
 ## Architecture Overview
 
@@ -278,7 +278,7 @@ class DhanWebSocketAdapter(BaseBrokerWebSocketAdapter):
 
 ## Data Normalization
 
-All adapters normalize broker data to OpenAlgo format:
+All adapters normalize broker data to TradeOS format:
 
 ```python
 # Normalized LTP message

@@ -17,7 +17,7 @@ logger = get_logger(__name__)
 def get_api_response(endpoint, auth, method="GET", payload=""):
     """Helper function to make API calls to Nubra"""
     AUTH_TOKEN = auth
-    device_id = "OPENALGO"  # Fixed device ID
+    device_id = "TRADEOS"  # Fixed device ID
 
     # Get the shared httpx client with connection pooling
     client = get_httpx_client()
@@ -62,7 +62,7 @@ class BrokerData:
     def __init__(self, auth_token):
         """Initialize Nubra data handler with authentication token"""
         self.auth_token = auth_token
-        # Map OpenAlgo timeframe format to Nubra intervals
+        # Map TradeOS timeframe format to Nubra intervals
         # Nubra supports: 1s, 1m, 2m, 3m, 5m, 15m, 30m, 1h, 1d, 1w, 1mt
         self.timeframe_map = {
             # Seconds
@@ -154,7 +154,7 @@ class BrokerData:
             ask_price = float(asks[0].get("p", 0)) / 100 if asks else 0
             ltp = float(orderbook.get("ltp", 0)) / 100
 
-            # Return quote in OpenAlgo format
+            # Return quote in TradeOS format
             # Note: Nubra doesn't provide open/high/low/close/oi in orderbook API
             return {
                 "bid": bid_price,
@@ -470,7 +470,7 @@ class BrokerData:
                 .reset_index(drop=True)
             )
 
-            # Reorder columns to match OpenAlgo REST API format
+            # Reorder columns to match TradeOS REST API format
             df = df[["close", "high", "low", "open", "timestamp", "volume", "oi"]]
 
             logger.info(f"Debug - Received {len(df)} candles for {symbol}")
@@ -599,7 +599,7 @@ class BrokerData:
             ltq = int(orderbook.get("ltq", 0))
             volume = int(orderbook.get("volume", 0))
 
-            # Return depth data in OpenAlgo format
+            # Return depth data in TradeOS format
             # Note: Nubra orderbook API doesn't provide open/high/low/close/oi
             return {
                 "bids": bids,
@@ -624,7 +624,7 @@ class BrokerData:
         Get list of supported intervals for historical data.
         
         Based on Nubra API: 1s, 1m, 2m, 3m, 5m, 15m, 30m, 1h, 1d, 1w
-        OpenAlgo supported: 1m, 3m, 5m, 15m, 30m, 1h, D
+        TradeOS supported: 1m, 3m, 5m, 15m, 30m, 1h, D
         
         Returns:
             list: List of supported interval strings

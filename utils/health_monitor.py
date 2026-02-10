@@ -100,7 +100,7 @@ def check_db_connectivity():
         dict: {
             "status": "pass"|"fail",
             "databases": {
-                "openalgo": "pass"|"fail",
+                "tradeos": "pass"|"fail",
                 "logs": "pass"|"fail",
                 ...
             }
@@ -110,7 +110,7 @@ def check_db_connectivity():
     overall_status = "pass"
 
     databases = {
-        "openalgo": "database.auth_db",
+        "tradeos": "database.auth_db",
         "logs": "database.traffic_db",
         "latency": "database.latency_db",
     }
@@ -277,7 +277,7 @@ def get_database_metrics():
 
         # Check each database (minimal overhead)
         databases = {
-            "openalgo": "database.auth_db",
+            "tradeos": "database.auth_db",
             "logs": "database.traffic_db",
             "latency": "database.latency_db",
             "apilog": "database.apilog_db",

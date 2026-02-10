@@ -289,7 +289,7 @@ CREATE TABLE sandbox_funds (
 
 ## API Integration
 
-All standard OpenAlgo API endpoints work seamlessly when Analyzer Mode is enabled:
+All standard TradeOS API endpoints work seamlessly when Analyzer Mode is enabled:
 
 ```python
 # In analyzer mode, these automatically route to sandbox

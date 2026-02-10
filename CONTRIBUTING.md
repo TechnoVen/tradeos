@@ -1,17 +1,17 @@
-# Contributing to OpenAlgo
+# Contributing to TradeOS
 
 
 ## Let's democratize algorithmic trading, together!
 
-We're thrilled that you're interested in contributing to OpenAlgo! This guide will help you get started, whether you're fixing a bug, adding a new broker, improving documentation, or building new features.
+We're thrilled that you're interested in contributing to TradeOS! This guide will help you get started, whether you're fixing a bug, adding a new broker, improving documentation, or building new features.
 
-Below you'll find everything you need to set up OpenAlgo on your computer and start contributing.
+Below you'll find everything you need to set up TradeOS on your computer and start contributing.
 
 ---
 
 ## Our Mission
 
-OpenAlgo is built **by traders, for traders**. We believe in democratizing algorithmic trading by providing a broker-agnostic, open-source platform that puts control back in the hands of traders. Every contribution, no matter how small, helps us achieve this mission.
+TradeOS is built **by traders, for traders**. We believe in democratizing algorithmic trading by providing a broker-agnostic, open-source platform that puts control back in the hands of traders. Every contribution, no matter how small, helps us achieve this mission.
 
 ---
 
@@ -34,7 +34,7 @@ OpenAlgo is built **by traders, for traders**. We believe in democratizing algor
 
 ## Technology Stack
 
-OpenAlgo is built using **Python Flask** for the backend and **TailwindCSS + DaisyUI** for the frontend.
+TradeOS is built using **Python Flask** for the backend and **TailwindCSS + DaisyUI** for the frontend.
 
 ### Backend Technologies
 
@@ -94,8 +94,8 @@ Before you begin, make sure you have the following installed:
 
 ```bash
 # Clone the repository
-git clone https://github.com/marketcalls/openalgo.git
-cd openalgo
+git clone https://github.com/TechnoVen/tradeos.git
+cd tradeos
 
 # Create and activate virtual environment
 # On Windows:
@@ -144,7 +144,7 @@ python -c "import secrets; print(secrets.token_hex(32))"
 
 ### Build Packages
 
-OpenAlgo requires CSS compilation before running. You have two options:
+TradeOS requires CSS compilation before running. You have two options:
 
 #### Option 1: Manual Build
 
@@ -223,7 +223,7 @@ python app.py
 Understanding the codebase structure will help you contribute effectively:
 
 ```
-openalgo/
+tradeos/
 ├── app.py                    # Main Flask application entry point
 ├── blueprints/               # Flask blueprints for web routes
 │   ├── auth.py              # Authentication routes (login, logout, setup)
@@ -299,11 +299,11 @@ openalgo/
 ```bash
 # Fork the repository on GitHub (click Fork button)
 # Clone your fork
-git clone https://github.com/YOUR_USERNAME/openalgo.git
-cd openalgo
+git clone https://github.com/YOUR_USERNAME/tradeos.git
+cd tradeos
 
 # Add upstream remote
-git remote add upstream https://github.com/marketcalls/openalgo.git
+git remote add upstream https://github.com/TechnoVen/tradeos.git
 
 # Verify remotes
 git remote -v
@@ -513,7 +513,7 @@ Great ways to get started:
    - Translate documentation to other languages
 
 2. **Bug Fixes**
-   - Check [issues labeled "good first issue"](https://github.com/marketcalls/openalgo/labels/good%20first%20issue)
+   - Check [issues labeled "good first issue"](https://github.com/TechnoVen/tradeos/labels/good%20first%20issue)
    - Fix minor bugs and edge cases
    - Improve error messages
 
@@ -571,7 +571,7 @@ More advanced contributions:
 
 ### Manual Testing
 
-OpenAlgo primarily uses manual testing currently:
+TradeOS primarily uses manual testing currently:
 
 1. **Application Testing**
    ```bash
@@ -652,7 +652,7 @@ broker/your_broker_name/
 ├── database/
 │   └── master_contract_db.py # Symbol master contract management
 ├── mapping/
-│   ├── order_data.py         # Transform OpenAlgo format to broker format
+│   ├── order_data.py         # Transform TradeOS format to broker format
 │   └── transform_data.py     # General data transformations
 ├── websocket/
 │   └── broker_adapter.py     # WebSocket adapter for live data
@@ -794,7 +794,7 @@ Create a setup guide in `/docs/broker_brokername.md`:
 ## Setup Steps
 1. Login to Broker Name dashboard
 2. Generate API credentials
-3. Configure in OpenAlgo settings
+3. Configure in TradeOS settings
 
 ## Features Supported
 - [x] Order placement
@@ -845,7 +845,7 @@ Study existing broker implementations as reference:
 
 #### Using DaisyUI Components
 
-OpenAlgo uses [DaisyUI](https://daisyui.com/components/) component library:
+TradeOS uses [DaisyUI](https://daisyui.com/components/) component library:
 
 ```html
 <!-- Button component -->
@@ -867,7 +867,7 @@ OpenAlgo uses [DaisyUI](https://daisyui.com/components/) component library:
 
 #### Theme System
 
-OpenAlgo uses three themes:
+TradeOS uses three themes:
 
 1. **Light** - Default theme
 2. **Dark** - Dark mode
@@ -934,7 +934,7 @@ Good documentation is crucial for open-source projects.
        """Place a trading order.
 
        Args:
-           symbol (str): Trading symbol in OpenAlgo format
+           symbol (str): Trading symbol in TradeOS format
            quantity (int): Number of shares/contracts
            price (float): Order price (0 for market orders)
            order_type (str): Order type ('MARKET', 'LIMIT', 'SL')
@@ -1181,14 +1181,14 @@ python app.py
 ### Support Channels
 
 - **Discord**: Join our [Discord server](https://discord.com/invite/UPh7QPsNhP) for real-time help
-- **GitHub Discussions**: Ask questions in [GitHub Discussions](https://github.com/marketcalls/openalgo/discussions)
-- **Documentation**: Check [docs.openalgo.in](https://docs.openalgo.in)
-- **GitHub Issues**: Report bugs in [Issues](https://github.com/marketcalls/openalgo/issues)
+- **GitHub Discussions**: Ask questions in [GitHub Discussions](https://github.com/TechnoVen/tradeos/discussions)
+- **Documentation**: Check [docs.tradeos.in](https://docs.tradeos.in)
+- **GitHub Issues**: Report bugs in [Issues](https://github.com/TechnoVen/tradeos/issues)
 
 ### Before Asking for Help
 
 1. **Search existing issues** - Your question might already be answered
-2. **Check documentation** - Review docs at docs.openalgo.in
+2. **Check documentation** - Review docs at docs.tradeos.in
 3. **Review error logs** - Include error messages when asking for help
 4. **Provide context** - Share your environment (OS, Python version, broker)
 
@@ -1203,7 +1203,7 @@ When asking for help, include:
 5. **Environment details**:
    - OS and version
    - Python version (`python --version`)
-   - OpenAlgo version
+   - TradeOS version
    - Broker being used
 
 Example:
@@ -1211,7 +1211,7 @@ Example:
 **Problem**: WebSocket connection fails when using Zerodha broker
 
 **Steps to reproduce**:
-1. Start OpenAlgo with `python app.py`
+1. Start TradeOS with `python app.py`
 2. Login with Zerodha credentials
 3. Navigate to Market Watch
 4. WebSocket connection shows "Disconnected"
@@ -1223,7 +1223,7 @@ Example:
 **Environment**:
 - OS: Windows 11
 - Python: 3.12.1
-- OpenAlgo: Latest main branch
+- TradeOS: Latest main branch
 - Broker: Zerodha
 - Error log: [attach error log]
 ```
@@ -1267,7 +1267,7 @@ We value all contributions! Contributors will be:
 
 - **Listed in contributors section** on GitHub
 - **Mentioned in release notes** for significant contributions
-- **Part of the OpenAlgo community** on Discord
+- **Part of the TradeOS community** on Discord
 - **Eligible for contributor benefits** (coming soon)
 
 ### Community Guidelines
@@ -1284,29 +1284,29 @@ Be respectful and follow these principles:
 
 ## Quick Reference Links
 
-- **Repository**: [github.com/marketcalls/openalgo](https://github.com/marketcalls/openalgo)
-- **Issue Tracker**: [github.com/marketcalls/openalgo/issues](https://github.com/marketcalls/openalgo/issues)
-- **Documentation**: [docs.openalgo.in](https://docs.openalgo.in)
+- **Repository**: [github.com/TechnoVen/tradeos](https://github.com/TechnoVen/tradeos)
+- **Issue Tracker**: [github.com/TechnoVen/tradeos/issues](https://github.com/TechnoVen/tradeos/issues)
+- **Documentation**: [docs.tradeos.in](https://docs.tradeos.in)
 - **Discord**: [discord.com/invite/UPh7QPsNhP](https://discord.com/invite/UPh7QPsNhP)
-- **PyPI Package**: [pypi.org/project/openalgo](https://pypi.org/project/openalgo)
-- **YouTube**: [youtube.com/@openalgoHQ](https://youtube.com/@openalgoHQ)
-- **Twitter/X**: [@openalgoHQ](https://twitter.com/openalgoHQ)
+- **PyPI Package**: [pypi.org/project/tradeos](https://pypi.org/project/tradeos)
+- **YouTube**: [youtube.com/@tradeosHQ](https://youtube.com/@tradeosHQ)
+- **Twitter/X**: [@tradeosHQ](https://twitter.com/tradeosHQ)
 
 ---
 
 ## License
 
-OpenAlgo is released under the **AGPL v3.0 License**. See the [LICENSE](License.md) file for details.
+TradeOS is released under the **AGPL v3.0 License**. See the [LICENSE](License.md) file for details.
 
-By contributing to OpenAlgo, you agree that your contributions will be licensed under the AGPL v3.0 License.
+By contributing to TradeOS, you agree that your contributions will be licensed under the AGPL v3.0 License.
 
 ---
 
 ## Thank You! 
 
-Thank you for contributing to OpenAlgo! Your efforts help democratize algorithmic trading and empower traders worldwide. Every line of code, documentation improvement, and bug report makes a difference.
+Thank you for contributing to TradeOS! Your efforts help democratize algorithmic trading and empower traders worldwide. Every line of code, documentation improvement, and bug report makes a difference.
 
-**Happy coding, and welcome to the OpenAlgo community!** 
+**Happy coding, and welcome to the TradeOS community!** 
 
 ---
 

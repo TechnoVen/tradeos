@@ -308,7 +308,7 @@ def get_collections():
     collections = []
 
     # Load Postman collection
-    postman_path = os.path.join("collections", "postman", "openalgo.postman_collection.json")
+    postman_path = os.path.join("collections", "postman", "tradeos.postman_collection.json")
     if os.path.exists(postman_path):
         with open(postman_path) as f:
             postman_data = json.load(f)
@@ -317,7 +317,7 @@ def get_collections():
             )
 
     # Load Bruno collection
-    bruno_path = os.path.join("collections", "openalgo_bruno.json")
+    bruno_path = os.path.join("collections", "tradeos_bruno.json")
     if os.path.exists(bruno_path):
         with open(bruno_path) as f:
             bruno_data = json.load(f)

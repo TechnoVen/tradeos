@@ -6,9 +6,9 @@ from typing import Dict, Optional, Set
 
 
 class ShoonyaExchangeMapper:
-    """Maps between OpenAlgo exchange names and Shoonya exchange codes"""
+    """Maps between TradeOS exchange names and Shoonya exchange codes"""
 
-    # OpenAlgo to Shoonya exchange mapping
+    # TradeOS to Shoonya exchange mapping
     EXCHANGE_MAP = {
         "NSE": "NSE",
         "BSE": "BSE",
@@ -21,17 +21,17 @@ class ShoonyaExchangeMapper:
     }
 
     # Reverse mapping
-    SHOONYA_TO_OPENALGO = {v: k for k, v in EXCHANGE_MAP.items()}
+    SHOONYA_TO_TRADEOS = {v: k for k, v in EXCHANGE_MAP.items()}
 
     @classmethod
     def to_shoonya_exchange(cls, oa_exchange: str) -> str | None:
-        """Convert OpenAlgo exchange to Shoonya exchange format"""
+        """Convert TradeOS exchange to Shoonya exchange format"""
         return cls.EXCHANGE_MAP.get(oa_exchange.upper())
 
     @classmethod
     def to_oa_exchange(cls, shoonya_exchange: str) -> str | None:
-        """Convert Shoonya exchange to OpenAlgo exchange format"""
-        return cls.SHOONYA_TO_OPENALGO.get(shoonya_exchange.upper())
+        """Convert Shoonya exchange to TradeOS exchange format"""
+        return cls.SHOONYA_TO_TRADEOS.get(shoonya_exchange.upper())
 
 
 class ShoonyaCapabilityRegistry:

@@ -42,7 +42,7 @@ logger = get_logger(__name__)
 
 
 class TelegramBotService:
-    """Service class for managing Telegram bot operations with OpenAlgo SDK integration"""
+    """Service class for managing Telegram bot operations with TradeOS SDK integration"""
 
     def __init__(self):
         self.application = None
@@ -54,7 +54,7 @@ class TelegramBotService:
         self.http_client = httpx.AsyncClient(timeout=30.0)
         self.bot_thread = None
         self.bot_loop = None
-        self.sdk_clients = {}  # Cache for OpenAlgo SDK clients per user
+        self.sdk_clients = {}  # Cache for TradeOS SDK clients per user
 
     def _get_webhook_secret(self) -> str:
         """
@@ -74,8 +74,8 @@ class TelegramBotService:
 
         return None
 
-    def _get_sdk_client(self, telegram_id: int) -> openalgo_api | None:
-        """Get or create OpenAlgo SDK client for a user"""
+    def _get_sdk_client(self, telegram_id: int) -> tradeos_api | None:
+        """Get or create TradeOS SDK client for a user"""
         try:
             # Check if client already exists
             if telegram_id in self.sdk_clients:
@@ -91,7 +91,7 @@ class TelegramBotService:
             api_key = credentials["api_key"]
 
             # Create SDK client
-            client = openalgo_api(api_key=api_key, host=host_url)
+            client = tradeos_api(api_key=api_key, host=host_url)
 
             # Cache the client
             self.sdk_clients[telegram_id] = client
@@ -526,8 +526,8 @@ class TelegramBotService:
             )
         else:
             await update.message.reply_text(
-                f"Welcome to OpenAlgo Bot, {user.first_name}! 🚀\n\n"
-                "To get started, link your OpenAlgo account:\n"
+                f"Welcome to TradeOS Bot, {user.first_name}! 🚀\n\n"
+                "To get started, link your TradeOS account:\n"
                 "`/link <api_key> <host_url>`\n\n"
                 "Example:\n"
                 "`/link your_api_key_here http://127.0.0.1:5000`\n\n"
@@ -543,7 +543,7 @@ class TelegramBotService:
 📚 *Available Commands:*
 
 *Account Management:*
-/link `<api_key> <host_url>` - Link your OpenAlgo account
+/link `<api_key> <host_url>` - Link your TradeOS account
 /unlink - Unlink your account
 /status - Check connection status
 
@@ -597,7 +597,7 @@ class TelegramBotService:
         # Validate API key by making a test call
         try:
             # Create temporary SDK client for validation
-            test_client = openalgo_api(api_key=api_key, host=host_url)
+            test_client = tradeos_api(api_key=api_key, host=host_url)
 
             # Test with a simple call
             loop = asyncio.get_event_loop()
@@ -688,7 +688,7 @@ class TelegramBotService:
             )
         else:
             await update.message.reply_text(
-                "❌ No linked account found.\nUse /link to connect your OpenAlgo account.",
+                "❌ No linked account found.\nUse /link to connect your TradeOS account.",
                 parse_mode=ParseMode.MARKDOWN,
             )
 
@@ -706,7 +706,7 @@ class TelegramBotService:
         # Get orderbook using SDK
         client = self._get_sdk_client(user.id)
         if not client:
-            await update.message.reply_text("❌ Failed to connect to OpenAlgo")
+            await update.message.reply_text("❌ Failed to connect to TradeOS")
             return
 
         loop = asyncio.get_event_loop()
@@ -757,7 +757,7 @@ class TelegramBotService:
         # Get tradebook using SDK
         client = self._get_sdk_client(user.id)
         if not client:
-            await update.message.reply_text("❌ Failed to connect to OpenAlgo")
+            await update.message.reply_text("❌ Failed to connect to TradeOS")
             return
 
         loop = asyncio.get_event_loop()
@@ -807,7 +807,7 @@ class TelegramBotService:
         # Get positions using SDK
         client = self._get_sdk_client(user.id)
         if not client:
-            await update.message.reply_text("❌ Failed to connect to OpenAlgo")
+            await update.message.reply_text("❌ Failed to connect to TradeOS")
             return
 
         loop = asyncio.get_event_loop()
@@ -860,7 +860,7 @@ class TelegramBotService:
         # Get holdings using SDK
         client = self._get_sdk_client(user.id)
         if not client:
-            await update.message.reply_text("❌ Failed to connect to OpenAlgo")
+            await update.message.reply_text("❌ Failed to connect to TradeOS")
             return
 
         loop = asyncio.get_event_loop()
@@ -927,7 +927,7 @@ class TelegramBotService:
         # Get funds using SDK
         client = self._get_sdk_client(user.id)
         if not client:
-            await update.message.reply_text("❌ Failed to connect to OpenAlgo")
+            await update.message.reply_text("❌ Failed to connect to TradeOS")
             return
 
         loop = asyncio.get_event_loop()
@@ -971,7 +971,7 @@ class TelegramBotService:
         # Get P&L from funds using SDK
         client = self._get_sdk_client(user.id)
         if not client:
-            await update.message.reply_text("❌ Failed to connect to OpenAlgo")
+            await update.message.reply_text("❌ Failed to connect to TradeOS")
             return
 
         loop = asyncio.get_event_loop()
@@ -1030,7 +1030,7 @@ class TelegramBotService:
         # Get quote using SDK
         client = self._get_sdk_client(user.id)
         if not client:
-            await update.message.reply_text("❌ Failed to connect to OpenAlgo")
+            await update.message.reply_text("❌ Failed to connect to TradeOS")
             return
 
         loop = asyncio.get_event_loop()
@@ -1189,7 +1189,7 @@ class TelegramBotService:
         reply_markup = InlineKeyboardMarkup(keyboard)
 
         await update.message.reply_text(
-            "📱 *OpenAlgo Trading Menu*\nSelect an option below:",
+            "📱 *TradeOS Trading Menu*\nSelect an option below:",
             reply_markup=reply_markup,
             parse_mode=ParseMode.MARKDOWN,
         )

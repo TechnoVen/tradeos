@@ -1,4 +1,4 @@
-# Mapping OpenAlgo API Request https://openalgo.in/docs
+# Mapping TradeOS API Request https://tradeos.io/docs
 # Mapping Samco Parameters https://www.samco.in/stocknote-api-documentation
 
 from database.token_db import get_br_symbol
@@ -6,7 +6,7 @@ from database.token_db import get_br_symbol
 
 def transform_data(data, token):
     """
-    Transforms the OpenAlgo API request structure to Samco expected structure.
+    Transforms the TradeOS API request structure to Samco expected structure.
     """
     symbol = get_br_symbol(data["symbol"], data["exchange"])
 
@@ -36,7 +36,7 @@ def transform_data(data, token):
 
 def transform_modify_order_data(data):
     """
-    Transforms the OpenAlgo modify order request to Samco expected structure.
+    Transforms the TradeOS modify order request to Samco expected structure.
     Only includes fields that can be modified (orderNumber goes in URL).
     """
     transformed = {
@@ -63,7 +63,7 @@ def transform_modify_order_data(data):
 
 def map_order_type(pricetype):
     """
-    Maps OpenAlgo pricetype to Samco order type.
+    Maps TradeOS pricetype to Samco order type.
     """
     order_type_mapping = {"MARKET": "MKT", "LIMIT": "L", "SL": "SL", "SL-M": "SL-M"}
     return order_type_mapping.get(pricetype, "MKT")
@@ -71,7 +71,7 @@ def map_order_type(pricetype):
 
 def map_product_type(product):
     """
-    Maps OpenAlgo product type to Samco product type.
+    Maps TradeOS product type to Samco product type.
     """
     product_type_mapping = {
         "CNC": "CNC",
@@ -83,7 +83,7 @@ def map_product_type(product):
 
 def reverse_map_product_type(product):
     """
-    Maps Samco product type back to OpenAlgo product type.
+    Maps Samco product type back to TradeOS product type.
     """
     reverse_product_type_mapping = {
         "CNC": "CNC",

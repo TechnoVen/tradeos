@@ -63,7 +63,7 @@ export default function TelegramUsers() {
       const filtered = users.filter(
         (user) =>
           user.telegram_username?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          user.openalgo_username?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          user.tradeos_username?.toLowerCase().includes(searchQuery.toLowerCase()) ||
           user.first_name?.toLowerCase().includes(searchQuery.toLowerCase())
       )
       setFilteredUsers(filtered)
@@ -193,7 +193,7 @@ export default function TelegramUsers() {
         </Card>
         <Card>
           <CardContent className="p-4 text-center">
-            <p className="text-2xl font-bold">{users.filter((u) => u.openalgo_username).length}</p>
+            <p className="text-2xl font-bold">{users.filter((u) => u.tradeos_username).length}</p>
             <p className="text-sm text-muted-foreground">Linked Accounts</p>
           </CardContent>
         </Card>
@@ -231,7 +231,7 @@ export default function TelegramUsers() {
               <TableHeader>
                 <TableRow>
                   <TableHead>Telegram User</TableHead>
-                  <TableHead>OpenAlgo Account</TableHead>
+                  <TableHead>TradeOS Account</TableHead>
                   <TableHead>Notifications</TableHead>
                   <TableHead>Joined</TableHead>
                   <TableHead>Last Active</TableHead>
@@ -259,8 +259,8 @@ export default function TelegramUsers() {
                         </div>
                       </TableCell>
                       <TableCell>
-                        {user.openalgo_username ? (
-                          <Badge variant="outline">{user.openalgo_username}</Badge>
+                        {user.tradeos_username ? (
+                          <Badge variant="outline">{user.tradeos_username}</Badge>
                         ) : (
                           <span className="text-muted-foreground">Not linked</span>
                         )}

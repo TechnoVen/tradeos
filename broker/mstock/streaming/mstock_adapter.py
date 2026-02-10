@@ -370,7 +370,7 @@ class MstockWebSocketAdapter(BaseBrokerWebSocketAdapter):
 
     def _normalize_market_data(self, quote_data: dict, mode: int) -> dict[str, Any]:
         """
-        Normalize mstock data format to OpenAlgo common format
+        Normalize mstock data format to TradeOS common format
 
         Args:
             quote_data: Raw quote data from mstock binary packet

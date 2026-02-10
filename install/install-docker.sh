@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# OpenAlgo Docker Installation Script
+# TradeOS Docker Installation Script
 # Simplified installation for Docker deployment with custom domain
 
 # Colors for output
@@ -10,7 +10,7 @@ BLUE='\033[0;34m'
 YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
-# OpenAlgo Banner
+# TradeOS Banner
 echo -e "${BLUE}"
 echo "  ██████╗ ██████╗ ███████╗███╗   ██╗ █████╗ ██╗      ██████╗  ██████╗ "
 echo " ██╔═══██╗██╔══██╗██╔════╝████╗  ██║██╔══██╗██║     ██╔════╝ ██╔═══██╗"
@@ -54,7 +54,7 @@ is_xts_broker() {
 }
 
 # Start installation
-log "Starting OpenAlgo Docker Installation..." "$GREEN"
+log "Starting TradeOS Docker Installation..." "$GREEN"
 log "========================================" "$GREEN"
 
 # Check if running as root
@@ -98,7 +98,7 @@ log "\n=== Installation Configuration ===" "$BLUE"
 
 # Get domain name
 while true; do
-    read -p "Enter your domain name (e.g., demo.openalgo.in): " DOMAIN
+    read -p "Enter your domain name (e.g., demo.tradeos.in): " DOMAIN
     if [ -z "$DOMAIN" ]; then
         log "Error: Domain name is required" "$RED"
         continue
@@ -168,7 +168,7 @@ APP_KEY=$(generate_hex)
 API_KEY_PEPPER=$(generate_hex)
 
 # Set installation path
-INSTALL_PATH="/opt/openalgo"
+INSTALL_PATH="/opt/tradeos"
 
 log "\n=== Installation Summary ===" "$YELLOW"
 log "Domain: $DOMAIN" "$BLUE"
@@ -223,8 +223,8 @@ if ! docker compose version &> /dev/null; then
 fi
 log "Docker Compose version: $(docker compose version --short)" "$GREEN"
 
-# Clone OpenAlgo repository
-log "\n=== Cloning OpenAlgo Repository ===" "$BLUE"
+# Clone TradeOS repository
+log "\n=== Cloning TradeOS Repository ===" "$BLUE"
 if [ -d "$INSTALL_PATH" ]; then
     log "Warning: $INSTALL_PATH already exists" "$YELLOW"
     read -p "Remove existing installation? (y/n): " remove_existing
@@ -236,7 +236,7 @@ if [ -d "$INSTALL_PATH" ]; then
     fi
 fi
 
-$SUDO git clone https://github.com/marketcalls/openalgo.git $INSTALL_PATH
+$SUDO git clone https://github.com/TechnoVen/tradeos.git $INSTALL_PATH
 check_status "Git clone failed"
 
 cd $INSTALL_PATH
@@ -330,13 +330,13 @@ log "Config: shm=${SHM_SIZE_MB}MB, threads=${THREAD_LIMIT}, strategy_mem=${STRAT
 log "\n=== Creating Docker Compose Configuration ===" "$BLUE"
 $SUDO tee docker-compose.yaml > /dev/null << EOF
 services:
-  openalgo:
-    image: openalgo:latest
+  tradeos:
+    image: tradeos:latest
     build:
       context: .
       dockerfile: Dockerfile
 
-    container_name: openalgo-web
+    container_name: tradeos-web
 
     ports:
       - "127.0.0.1:5000:5000"
@@ -344,11 +344,11 @@ services:
 
     # Use named volumes to avoid permission issues with non-root container user
     volumes:
-      - openalgo_db:/app/db
-      - openalgo_log:/app/log
-      - openalgo_strategies:/app/strategies
-      - openalgo_keys:/app/keys
-      - openalgo_tmp:/app/tmp
+      - tradeos_db:/app/db
+      - tradeos_log:/app/log
+      - tradeos_strategies:/app/strategies
+      - tradeos_keys:/app/keys
+      - tradeos_tmp:/app/tmp
       - ./.env:/app/.env:ro
 
     environment:
@@ -357,7 +357,7 @@ services:
       - APP_MODE=standalone
       - TZ=Asia/Kolkata
       # Resource limits auto-calculated based on system specs
-      # See: https://github.com/marketcalls/openalgo/issues/822
+      # See: https://github.com/TechnoVen/tradeos/issues/822
       - OPENBLAS_NUM_THREADS=${THREAD_LIMIT}
       - OMP_NUM_THREADS=${THREAD_LIMIT}
       - MKL_NUM_THREADS=${THREAD_LIMIT}
@@ -379,15 +379,15 @@ services:
 
 # Named volumes for data persistence with proper permissions
 volumes:
-  openalgo_db:
+  tradeos_db:
     driver: local
-  openalgo_log:
+  tradeos_log:
     driver: local
-  openalgo_strategies:
+  tradeos_strategies:
     driver: local
-  openalgo_keys:
+  tradeos_keys:
     driver: local
-  openalgo_tmp:
+  tradeos_tmp:
     driver: local
 EOF
 
@@ -444,12 +444,12 @@ limit_req_zone \$binary_remote_addr zone=api_limit:10m rate=50r/s;
 limit_req_zone \$binary_remote_addr zone=general_limit:10m rate=10r/s;
 
 # Upstream definitions
-upstream openalgo_flask {
+upstream tradeos_flask {
     server 127.0.0.1:5000;
     keepalive 64;
 }
 
-upstream openalgo_websocket {
+upstream tradeos_websocket {
     server 127.0.0.1:8765;
     keepalive 64;
 }
@@ -510,7 +510,7 @@ server {
 
     # WebSocket Proxy Server (Port 8765)
     location = /ws {
-        proxy_pass http://openalgo_websocket;
+        proxy_pass http://tradeos_websocket;
         proxy_http_version 1.1;
         proxy_read_timeout 86400s;
         proxy_send_timeout 86400s;
@@ -529,7 +529,7 @@ server {
     }
 
     location /ws/ {
-        proxy_pass http://openalgo_websocket/;
+        proxy_pass http://tradeos_websocket/;
         proxy_http_version 1.1;
         proxy_read_timeout 86400s;
         proxy_send_timeout 86400s;
@@ -549,7 +549,7 @@ server {
 
     # Socket.IO WebSocket
     location /socket.io/ {
-        proxy_pass http://openalgo_flask/socket.io/;
+        proxy_pass http://tradeos_flask/socket.io/;
         proxy_http_version 1.1;
         proxy_read_timeout 86400s;
         proxy_send_timeout 86400s;
@@ -570,7 +570,7 @@ server {
     location /api/ {
         limit_req zone=api_limit burst=100 nodelay;
         limit_req_status 429;
-        proxy_pass http://openalgo_flask;
+        proxy_pass http://tradeos_flask;
         proxy_http_version 1.1;
         proxy_read_timeout 300s;
         proxy_connect_timeout 300s;
@@ -587,7 +587,7 @@ server {
 
     # Static Files
     location /static/ {
-        proxy_pass http://openalgo_flask;
+        proxy_pass http://tradeos_flask;
         proxy_http_version 1.1;
         proxy_cache_valid 200 1d;
         proxy_cache_bypass \$http_pragma \$http_authorization;
@@ -602,7 +602,7 @@ server {
     # Main Application
     location / {
         limit_req zone=general_limit burst=20 nodelay;
-        proxy_pass http://openalgo_flask;
+        proxy_pass http://tradeos_flask;
         proxy_http_version 1.1;
         proxy_read_timeout 300s;
         proxy_connect_timeout 300s;
@@ -665,7 +665,7 @@ log "\nWaiting for container to be healthy..." "$YELLOW"
 sleep 10
 
 # Check container status
-CONTAINER_STATUS=$(sudo docker ps --filter "name=openalgo-web" --format "{{.Status}}")
+CONTAINER_STATUS=$(sudo docker ps --filter "name=tradeos-web" --format "{{.Status}}")
 if [[ $CONTAINER_STATUS == *"Up"* ]]; then
     log "Container started successfully!" "$GREEN"
 else
@@ -677,55 +677,55 @@ fi
 log "\n=== Creating Management Scripts ===" "$BLUE"
 
 # Status script
-$SUDO tee /usr/local/bin/openalgo-status > /dev/null << 'EOFSCRIPT'
+$SUDO tee /usr/local/bin/tradeos-status > /dev/null << 'EOFSCRIPT'
 #!/bin/bash
 echo "=========================================="
-echo "OpenAlgo Status"
+echo "TradeOS Status"
 echo "=========================================="
 echo ""
 echo "Container Status:"
-sudo docker ps --filter "name=openalgo-web" --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
+sudo docker ps --filter "name=tradeos-web" --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
 echo ""
 echo "Container Health:"
-sudo docker inspect openalgo-web --format='{{.State.Health.Status}}' 2>/dev/null || echo "Container not found"
+sudo docker inspect tradeos-web --format='{{.State.Health.Status}}' 2>/dev/null || echo "Container not found"
 echo ""
 echo "Recent Logs:"
-sudo docker compose -f /opt/openalgo/docker-compose.yaml logs --tail=30
+sudo docker compose -f /opt/tradeos/docker-compose.yaml logs --tail=30
 EOFSCRIPT
 
-$SUDO chmod +x /usr/local/bin/openalgo-status
+$SUDO chmod +x /usr/local/bin/tradeos-status
 
 # Restart script
-$SUDO tee /usr/local/bin/openalgo-restart > /dev/null << 'EOFSCRIPT'
+$SUDO tee /usr/local/bin/tradeos-restart > /dev/null << 'EOFSCRIPT'
 #!/bin/bash
-echo "Restarting OpenAlgo..."
-cd /opt/openalgo
+echo "Restarting TradeOS..."
+cd /opt/tradeos
 sudo docker compose restart
 sleep 10
 echo "Container Status:"
-sudo docker ps --filter "name=openalgo-web"
+sudo docker ps --filter "name=tradeos-web"
 EOFSCRIPT
 
-$SUDO chmod +x /usr/local/bin/openalgo-restart
+$SUDO chmod +x /usr/local/bin/tradeos-restart
 
 # Logs script
-$SUDO tee /usr/local/bin/openalgo-logs > /dev/null << 'EOFSCRIPT'
+$SUDO tee /usr/local/bin/tradeos-logs > /dev/null << 'EOFSCRIPT'
 #!/bin/bash
-cd /opt/openalgo
+cd /opt/tradeos
 sudo docker compose logs -f --tail=100
 EOFSCRIPT
 
-$SUDO chmod +x /usr/local/bin/openalgo-logs
+$SUDO chmod +x /usr/local/bin/tradeos-logs
 
 # Backup script
-$SUDO tee /usr/local/bin/openalgo-backup > /dev/null << 'EOFSCRIPT'
+$SUDO tee /usr/local/bin/tradeos-backup > /dev/null << 'EOFSCRIPT'
 #!/bin/bash
-BACKUP_DIR="/opt/openalgo-backups"
+BACKUP_DIR="/opt/tradeos-backups"
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
-BACKUP_FILE="$BACKUP_DIR/openalgo_backup_$TIMESTAMP.tar.gz"
+BACKUP_FILE="$BACKUP_DIR/tradeos_backup_$TIMESTAMP.tar.gz"
 mkdir -p $BACKUP_DIR
 echo "Creating backup..."
-cd /opt/openalgo
+cd /opt/tradeos
 
 # Backup .env file and Docker volume data
 echo "Backing up configuration and volume data..."
@@ -735,8 +735,8 @@ sudo docker compose stop
 TEMP_DIR=$(mktemp -d)
 
 # Export data from Docker volumes
-sudo docker run --rm -v openalgo_db:/data -v $TEMP_DIR:/backup alpine tar -czf /backup/db.tar.gz -C /data . 2>/dev/null
-sudo docker run --rm -v openalgo_strategies:/data -v $TEMP_DIR:/backup alpine tar -czf /backup/strategies.tar.gz -C /data . 2>/dev/null
+sudo docker run --rm -v tradeos_db:/data -v $TEMP_DIR:/backup alpine tar -czf /backup/db.tar.gz -C /data . 2>/dev/null
+sudo docker run --rm -v tradeos_strategies:/data -v $TEMP_DIR:/backup alpine tar -czf /backup/strategies.tar.gz -C /data . 2>/dev/null
 
 # Create final backup
 sudo tar -czf $BACKUP_FILE .env -C $TEMP_DIR db.tar.gz strategies.tar.gz 2>/dev/null
@@ -749,11 +749,11 @@ echo "Backup created: $BACKUP_FILE"
 
 # Keep only last 7 backups
 cd $BACKUP_DIR
-ls -t openalgo_backup_*.tar.gz 2>/dev/null | tail -n +8 | xargs -r rm
+ls -t tradeos_backup_*.tar.gz 2>/dev/null | tail -n +8 | xargs -r rm
 echo "Backup completed!"
 EOFSCRIPT
 
-$SUDO chmod +x /usr/local/bin/openalgo-backup
+$SUDO chmod +x /usr/local/bin/tradeos-backup
 
 log "Management scripts created successfully!" "$GREEN"
 
@@ -768,25 +768,25 @@ $SUDO chmod +x /etc/letsencrypt/renewal-hooks/deploy/reload-nginx.sh
 
 # Installation complete
 log "\n============================================" "$GREEN"
-log "OpenAlgo Docker Installation Complete!" "$GREEN"
+log "TradeOS Docker Installation Complete!" "$GREEN"
 log "============================================" "$GREEN"
 
 log "\nInstallation Summary:" "$YELLOW"
 log "Domain: https://$DOMAIN" "$BLUE"
 log "Broker: $BROKER_NAME" "$BLUE"
 log "Installation Path: $INSTALL_PATH" "$BLUE"
-log "Container: openalgo-web" "$BLUE"
+log "Container: tradeos-web" "$BLUE"
 
 log "\nNext Steps:" "$YELLOW"
-log "1. Visit https://$DOMAIN to access OpenAlgo" "$GREEN"
+log "1. Visit https://$DOMAIN to access TradeOS" "$GREEN"
 log "2. Create your admin account and login" "$GREEN"
 log "3. Configure your broker settings" "$GREEN"
 
 log "\nUseful Commands:" "$YELLOW"
-log "View status:  openalgo-status" "$BLUE"
-log "View logs:    openalgo-logs" "$BLUE"
-log "Restart:      openalgo-restart" "$BLUE"
-log "Backup:       openalgo-backup" "$BLUE"
+log "View status:  tradeos-status" "$BLUE"
+log "View logs:    tradeos-logs" "$BLUE"
+log "Restart:      tradeos-restart" "$BLUE"
+log "Backup:       tradeos-backup" "$BLUE"
 
 log "\nDocker Commands:" "$YELLOW"
 log "Restart:      cd $INSTALL_PATH && sudo docker compose restart" "$BLUE"

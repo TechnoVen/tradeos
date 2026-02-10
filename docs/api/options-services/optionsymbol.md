@@ -95,7 +95,7 @@ Custom Domain:  POST https://<your-custom-domain>/api/v1/optionsymbol
 
 | Parameter | Description | Mandatory/Optional | Default Value |
 |-----------|-------------|-------------------|---------------|
-| apikey | Your OpenAlgo API key | Mandatory | - |
+| apikey | Your TradeOS API key | Mandatory | - |
 | underlying | Underlying symbol (NIFTY, BANKNIFTY, SENSEX) | Mandatory | - |
 | exchange | Exchange: NSE_INDEX, BSE_INDEX | Mandatory | - |
 | expiry_date | Expiry date in DDMMMYY format | Mandatory | - |

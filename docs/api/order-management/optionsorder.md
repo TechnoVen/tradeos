@@ -116,7 +116,7 @@ Custom Domain:  POST https://<your-custom-domain>/api/v1/optionsorder
 
 | Parameter | Description | Mandatory/Optional | Default Value |
 |-----------|-------------|-------------------|---------------|
-| apikey | Your OpenAlgo API key | Mandatory | - |
+| apikey | Your TradeOS API key | Mandatory | - |
 | strategy | Strategy identifier | Optional | - |
 | underlying | Underlying symbol (NIFTY, BANKNIFTY, etc.) | Mandatory | - |
 | exchange | Exchange: NSE_INDEX, BSE_INDEX, NFO, BFO | Mandatory | - |

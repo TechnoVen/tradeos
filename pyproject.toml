@@ -1,8 +1,8 @@
 [project]
 requires-python = ">=3.12"
-name = "openalgoUI"
+name = "tradeos"
 version = "2.0.0.0"
-description = "Broker-agnostic open-source trading automation"
+description = "International AI-powered algorithmic trading platform. Built upon OpenAlgo."
 dependencies = [
   "aniso8601==9.0.1",
   "annotated-types==0.7.0",

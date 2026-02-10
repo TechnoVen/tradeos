@@ -1,8 +1,10 @@
 {
     "Plugin Name": "IBulls",
-    "Plugin URI": "https://openalgo.in",
-    "Description":"IBulls Plugin",
+    "Plugin URI": "https://github.com/TechnoVen/tradeos",
+    "Description": "IBulls Plugin",
     "Version": "1.0",
     "Author": "Kalaivani",
-    "Author URI": "https://openalgo.in"
+    "Author URI": "https://github.com/TechnoVen/tradeos",
+    "region": "IN",
+    "enabled": false
 }

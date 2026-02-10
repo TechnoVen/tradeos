@@ -13,7 +13,7 @@ def calculate_margin_api(positions, auth):
     Calculate margin requirement for a basket of positions using Flattrade Span Calculator API.
 
     Args:
-        positions: List of positions in OpenAlgo format
+        positions: List of positions in TradeOS format
         auth: Authentication token (jKey) for Flattrade
 
     Returns:

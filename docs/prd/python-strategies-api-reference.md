@@ -402,20 +402,20 @@ When a strategy runs, these environment variables are available:
 
 | Variable | Description |
 |----------|-------------|
-| `OPENALGO_APIKEY` | API key for OpenAlgo requests |
-| `OPENALGO_HOST` | OpenAlgo server URL |
+| `TRADEOS_APIKEY` | API key for TradeOS requests |
+| `TRADEOS_HOST` | TradeOS server URL |
 | `PYTHONUNBUFFERED` | Set to '1' for real-time output |
 
-### Using OpenAlgo SDK in Strategy
+### Using TradeOS SDK in Strategy
 
 ```python
 #!/usr/bin/env python
 import os
-from openalgo import api
+from tradeos import api
 
 # Get credentials from environment
-API_KEY = os.getenv('OPENALGO_APIKEY')
-HOST = os.getenv('OPENALGO_HOST', 'http://127.0.0.1:5000')
+API_KEY = os.getenv('TRADEOS_APIKEY')
+HOST = os.getenv('TRADEOS_HOST', 'http://127.0.0.1:5000')
 
 # Initialize client
 client = api(api_key=API_KEY, host=HOST)

@@ -505,7 +505,7 @@ class ZerodhaWebSocket:
                     close_timeout=5,
                     max_size=self.MAX_MESSAGE_SIZE,
                     compression=None,  # Disable compression for binary data
-                    extra_headers={"User-Agent": "OpenAlgo-ZerodhaClient/1.0"},
+                    extra_headers={"User-Agent": "TradeOS-ZerodhaClient/1.0"},
                 ),
                 timeout=self.CONNECT_TIMEOUT,
             )

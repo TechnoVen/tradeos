@@ -2,7 +2,7 @@
 
 ## Overview
 
-OpenAlgo provides core trading UI components including Dashboard, OrderBook, TradeBook, Positions, and Holdings. These components display real-time data with auto-refresh and support both React and Jinja2 frontends.
+TradeOS provides core trading UI components including Dashboard, OrderBook, TradeBook, Positions, and Holdings. These components display real-time data with auto-refresh and support both React and Jinja2 frontends.
 
 ## Architecture Diagram
 

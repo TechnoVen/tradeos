@@ -1,4 +1,4 @@
-# Mapping OpenAlgo API Request https://openalgo.in/docs
+# Mapping TradeOS API Request https://tradeos.io/docs
 # Mapping Shoonya Span Calculator API
 
 from database.token_db import get_br_symbol
@@ -9,10 +9,10 @@ logger = get_logger(__name__)
 
 def transform_margin_positions(positions, account_id):
     """
-    Transform OpenAlgo margin positions to Shoonya margin format.
+    Transform TradeOS margin positions to Shoonya margin format.
 
     Args:
-        positions: List of positions in OpenAlgo format
+        positions: List of positions in TradeOS format
         account_id: Shoonya account ID (API key without last 2 chars)
 
     Returns:
@@ -22,7 +22,7 @@ def transform_margin_positions(positions, account_id):
 
     for position in positions:
         try:
-            # Use the original OpenAlgo symbol for parsing derivative details
+            # Use the original TradeOS symbol for parsing derivative details
             oa_symbol = position["symbol"]
 
             # Log the incoming position data
@@ -40,7 +40,7 @@ def transform_margin_positions(positions, account_id):
                 )
                 continue
 
-            # Parse the OpenAlgo symbol (not broker symbol) to extract details
+            # Parse the TradeOS symbol (not broker symbol) to extract details
             # Determine instrument name based on symbol pattern
             instname = determine_instrument_name(oa_symbol, position["exchange"])
 
@@ -55,7 +55,7 @@ def transform_margin_positions(positions, account_id):
                 f"Parsed symbol '{oa_symbol}': instname={instname}, symname={symname}, exd={exd}, optt={optt}, strprc={strprc}"
             )
 
-            # Map product type from OpenAlgo to Shoonya format
+            # Map product type from TradeOS to Shoonya format
             # Official SDK: C = CNC, M = NRML/Margin, H = MIS (Intraday)
             product_map = {
                 "CNC": "C",
@@ -247,13 +247,13 @@ def extract_derivative_details(symbol, exchange):
 
 def parse_margin_response(response_data):
     """
-    Parse Shoonya margin response to OpenAlgo standard format.
+    Parse Shoonya margin response to TradeOS standard format.
 
     Args:
         response_data: Raw response from Shoonya API
 
     Returns:
-        Standardized margin response matching OpenAlgo format
+        Standardized margin response matching TradeOS format
     """
     try:
         if not response_data or not isinstance(response_data, dict):
@@ -270,7 +270,7 @@ def parse_margin_response(response_data):
         expo = float(response_data.get("expo", 0))
         total_margin = span + expo
 
-        # Return standardized format matching OpenAlgo API specification
+        # Return standardized format matching TradeOS API specification
         return {
             "status": "success",
             "data": {

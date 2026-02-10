@@ -18,7 +18,7 @@ This helps developers toggle between silent mode, basic logs, or full debug-leve
 ### **Usage**
 
 ```python
-from openalgo import api
+from tradeos import api
 
 # Silent mode (default) - no SDK output
 client = api(api_key="...", host="...", ws_url="...", verbose=False)
@@ -36,9 +36,9 @@ client = api(api_key="...", host="...", ws_url="...", verbose=2)
 
 ```python
 """
-Test verbose control in OpenAlgo WebSocket Feed
+Test verbose control in TradeOS WebSocket Feed
 """
-from openalgo import api
+from tradeos import api
 import time
 
 # Change this to test different levels: False, True, 1, 2

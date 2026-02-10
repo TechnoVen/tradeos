@@ -56,7 +56,7 @@ def place_single_split_order(
 
     Args:
         order_data: Order data with symbol, exchange, action, quantity, etc.
-        api_key: OpenAlgo API key
+        api_key: TradeOS API key
         order_num: Order number in the sequence
         total_orders: Total number of orders
         auth_token: Direct broker auth token (optional)
@@ -127,7 +127,7 @@ def place_options_order(
             - disclosed_quantity: Disclosed quantity
             - strategy: Strategy name
             - apikey: API key
-        api_key: OpenAlgo API key (for API-based calls)
+        api_key: TradeOS API key (for API-based calls)
         auth_token: Direct broker authentication token (for internal calls)
         broker: Direct broker name (for internal calls)
 

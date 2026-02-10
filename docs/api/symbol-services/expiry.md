@@ -65,7 +65,7 @@ Custom Domain:  POST https://<your-custom-domain>/api/v1/expiry
 
 | Parameter | Description | Mandatory/Optional | Default Value |
 |-----------|-------------|-------------------|---------------|
-| apikey | Your OpenAlgo API key | Mandatory | - |
+| apikey | Your TradeOS API key | Mandatory | - |
 | symbol | Underlying symbol (e.g., NIFTY, BANKNIFTY) | Mandatory | - |
 | exchange | Exchange code: NFO, BFO, CDS, BCD, MCX | Mandatory | - |
 | instrumenttype | Instrument type: "options" or "futures" | Mandatory | - |

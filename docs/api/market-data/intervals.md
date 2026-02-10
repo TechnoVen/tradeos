@@ -38,7 +38,7 @@ Custom Domain:  POST https://<your-custom-domain>/api/v1/intervals
 
 | Parameter | Description | Mandatory/Optional | Default Value |
 |-----------|-------------|-------------------|---------------|
-| apikey | Your OpenAlgo API key | Mandatory | - |
+| apikey | Your TradeOS API key | Mandatory | - |
 
 ## Response Fields
 

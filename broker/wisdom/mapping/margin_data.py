@@ -1,4 +1,4 @@
-# Mapping OpenAlgo API Request https://openalgo.in/docs
+# Mapping TradeOS API Request https://tradeos.io/docs
 # Wisdom does not provide Margin Calculator API
 
 from utils.logging import get_logger
@@ -8,12 +8,12 @@ logger = get_logger(__name__)
 
 def transform_margin_positions(positions):
     """
-    Transform OpenAlgo margin position format to broker format.
+    Transform TradeOS margin position format to broker format.
 
     Note: Wisdom does not provide a margin calculator API.
 
     Args:
-        positions: List of positions in OpenAlgo format
+        positions: List of positions in TradeOS format
 
     Raises:
         NotImplementedError: Wisdom does not support margin calculator API
@@ -23,7 +23,7 @@ def transform_margin_positions(positions):
 
 def parse_margin_response(response_data):
     """
-    Parse broker margin calculator response to OpenAlgo standard format.
+    Parse broker margin calculator response to TradeOS standard format.
 
     Note: Wisdom does not provide a margin calculator API.
 

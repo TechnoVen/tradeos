@@ -18,7 +18,7 @@ def map_order_data(order_data):
     - order_data: Response from Nubra API (list of orders or dict with status).
 
     Returns:
-    - The modified order_data normalized to OpenAlgo format.
+    - The modified order_data normalized to TradeOS format.
     """
     # Nubra API returns a direct list of orders, not wrapped in {status: bool, data: [...]}
     # Handle both cases for compatibility
@@ -46,7 +46,7 @@ def map_order_data(order_data):
         # Get ref_data for symbol information
         ref_data = order.get("ref_data", {})
         
-        # Map Nubra fields to OpenAlgo/Angel-like format
+        # Map Nubra fields to TradeOS/Angel-like format
         # Nubra: order_side -> transactiontype (BUY/SELL)
         order_side = order.get("order_side", "")
         if order_side == "ORDER_SIDE_BUY":
@@ -71,7 +71,7 @@ def map_order_data(order_data):
         # Nubra uses both order_type and price_type:
         # - order_type: ORDER_TYPE_REGULAR, ORDER_TYPE_STOPLOSS, ORDER_TYPE_ICEBERG
         # - price_type: MARKET, LIMIT
-        # For OpenAlgo we need: MARKET, LIMIT, SL, SL-M (uppercase like Angel)
+        # For TradeOS we need: MARKET, LIMIT, SL, SL-M (uppercase like Angel)
         order_type = order.get("order_type", "")
         price_type = order.get("price_type", "")
         
@@ -308,7 +308,7 @@ def transform_tradebook_data(tradebook_data):
 
 def map_position_data(position_data):
     """
-    Map Nubra's positions response to OpenAlgo normalized format.
+    Map Nubra's positions response to TradeOS normalized format.
     
     Nubra returns positions in portfolio.stock_positions, portfolio.fut_positions, 
     portfolio.opt_positions arrays. Prices are in paise (divide by 100).
@@ -381,7 +381,7 @@ def map_position_data(position_data):
             ltp_paise = pos.get("ltp", 0) or 0
             pnl_rupees = pos.get("pnl", 0) or 0  # Already in rupees
             
-            # Map product type from Nubra format to OpenAlgo format
+            # Map product type from Nubra format to TradeOS format
             product = pos.get("product", "")
             if product == "ORDER_DELIVERY_TYPE_CNC":
                 producttype = "CNC"

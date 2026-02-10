@@ -1622,7 +1622,7 @@ export default function ProfilePage() {
             <FolderCheck className="h-4 w-4" />
             <AlertTitle>File Permissions Monitor</AlertTitle>
             <AlertDescription>
-              Check file and directory permissions for OpenAlgo components. Incorrect permissions may cause
+              Check file and directory permissions for TradeOS components. Incorrect permissions may cause
               the application to malfunction.
             </AlertDescription>
           </Alert>
@@ -2248,7 +2248,7 @@ export default function ProfilePage() {
                 Your configuration has been saved to the <code className="bg-muted px-1 rounded">.env</code> file.
               </p>
               <p>
-                To apply these changes, please restart the OpenAlgo application using your usual method (terminal, service manager, or container orchestrator).
+                To apply these changes, please restart the TradeOS application using your usual method (terminal, service manager, or container orchestrator).
               </p>
             </AlertDialogDescription>
           </AlertDialogHeader>

@@ -4,10 +4,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-OpenAlgo is a production-ready algorithmic trading platform built with Flask (backend) and React 19 (frontend). It provides a unified API layer across 24+ Indian brokers, enabling seamless integration with TradingView, Amibroker, Excel, Python, and AI agents.
+TradeOS is a production-ready algorithmic trading platform built with Flask (backend) and React 19 (frontend). It provides a unified API layer across 24+ Indian brokers, enabling seamless integration with TradingView, Amibroker, Excel, Python, and AI agents.
 
-**Repository**: https://github.com/marketcalls/openalgo
-**Documentation**: https://docs.openalgo.in
+**Repository**: https://github.com/TechnoVen/tradeos
+**Documentation**: https://docs.tradeos.io
 
 ## Development Environment Setup
 
@@ -97,9 +97,9 @@ npm run format
 
 ### Database Architecture
 
-OpenAlgo uses **5 separate databases** for isolation:
+TradeOS uses **5 separate databases** for isolation:
 
-- `db/openalgo.db` - Main database (users, orders, positions, settings)
+- `db/tradeos.db` - Main database (users, orders, positions, settings)
 - `db/logs.db` - Traffic and API logs
 - `db/latency.db` - Latency monitoring data
 - `db/sandbox.db` - Analyzer/sandbox mode (isolated virtual trading)
@@ -115,7 +115,7 @@ All 24+ brokers follow a standardized structure in `broker/{broker_name}/`:
 2. `api/order_api.py` - Place, modify, cancel orders
 3. `api/data.py` - Quotes, depth, historical data
 4. `api/funds.py` - Account balance and margins
-5. `mapping/` - Transform OpenAlgo format ↔ broker format
+5. `mapping/` - Transform TradeOS format ↔ broker format
 6. `streaming/` - WebSocket adapter for real-time data
 7. `database/master_contract_db.py` - Symbol mapping
 8. `plugin.json` - Broker metadata
@@ -293,7 +293,7 @@ API keys are generated at `/apikey` and hashed with pepper before storage.
 
 ### Symbol Format
 
-OpenAlgo uses standardized symbol format across all brokers:
+TradeOS uses standardized symbol format across all brokers:
 ```
 NSE:SBIN-EQ          # Equity
 NFO:NIFTY24JAN24000CE  # Options

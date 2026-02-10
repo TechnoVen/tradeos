@@ -2,14 +2,14 @@
 
 ## Overview
 
-This assessment covers the security of OpenAlgo's REST API, focusing on protecting your trading operations from unauthorized access via webhooks.
+This assessment covers the security of TradeOS's REST API, focusing on protecting your trading operations from unauthorized access via webhooks.
 
 **Risk Level**: Medium
 **Status**: Good
 
 ## Deployment Context
 
-OpenAlgo API is accessed in two scenarios:
+TradeOS API is accessed in two scenarios:
 
 | Scenario | Access Method | Security |
 |----------|---------------|----------|
@@ -86,7 +86,7 @@ POST https://yourdomain.com/api/v1/placeorder
           │
           ▼
 ┌─────────────────────────────────────┐
-│         OpenAlgo API                 │
+│         TradeOS API                 │
 │  1. Validate API key (hash compare)  │
 │  2. Validate input (Marshmallow)     │
 │  3. Check rate limits                │
@@ -196,7 +196,7 @@ Even for single-user:
 - [x] Security headers
 - [x] Firewall rules
 
-### Built into OpenAlgo
+### Built into TradeOS
 
 - [x] API key required for all endpoints
 - [x] API keys hashed in database
@@ -220,7 +220,7 @@ URL: https://yourdomain.com/api/v1/placeorder
 
 Message:
 {
-    "apikey": "your_openalgo_api_key",
+    "apikey": "your_tradeos_api_key",
     "symbol": "{{ticker}}",
     "exchange": "NSE",
     "action": "{{strategy.order.action}}",
@@ -246,7 +246,7 @@ Message:
 - Security headers
 - Firewall
 
-**Built-in (OpenAlgo)**:
+**Built-in (TradeOS)**:
 - API key authentication
 - Input validation
 - Rate limiting

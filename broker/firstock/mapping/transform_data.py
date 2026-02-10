@@ -1,4 +1,4 @@
-# Mapping OpenAlgo API Request https://openalgo.in/docs
+# Mapping TradeOS API Request https://tradeos.io/docs
 # Mapping Firstock API Parameters https://connect.thefirstock.com/api/V4/placeOrder
 
 import html
@@ -8,9 +8,9 @@ from database.token_db import get_br_symbol
 
 def transform_data(data, token):
     """
-    Transforms the OpenAlgo API request structure to Firstock's expected structure.
+    Transforms the TradeOS API request structure to Firstock's expected structure.
 
-    OpenAlgo format:
+    TradeOS format:
     {
         "apikey": "...",
         "strategy": "...",
@@ -102,7 +102,7 @@ def transform_modify_order_data(data, token):
 
 def map_order_type(pricetype):
     """
-    Maps the OpenAlgo pricetype to Firstock's order type.
+    Maps the TradeOS pricetype to Firstock's order type.
     """
     order_type_mapping = {"MARKET": "MKT", "LIMIT": "LMT", "SL": "SL-LMT", "SL-M": "SL-MKT"}
     return order_type_mapping.get(pricetype, "MKT")  # Default to MKT if not found
@@ -110,7 +110,7 @@ def map_order_type(pricetype):
 
 def map_product_type(product):
     """
-    Maps the OpenAlgo product type to Firstock's product type.
+    Maps the TradeOS product type to Firstock's product type.
     """
     product_type_mapping = {"CNC": "C", "NRML": "M", "MIS": "I"}
     return product_type_mapping.get(product, "I")  # Default to I (MIS) if not found
@@ -118,7 +118,7 @@ def map_product_type(product):
 
 def reverse_map_product_type(product):
     """
-    Maps Firstock's product type to OpenAlgo product type.
+    Maps Firstock's product type to TradeOS product type.
     """
     reverse_product_type_mapping = {"C": "CNC", "M": "NRML", "I": "MIS"}
     return reverse_product_type_mapping.get(product, "MIS")  # Default to MIS if not found

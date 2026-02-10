@@ -31,12 +31,12 @@ import {
 } from '@/components/ui/accordion'
 
 const sampleStrategy = `"""
-Sample EMA Crossover Strategy using OpenAlgo SDK
+Sample EMA Crossover Strategy using TradeOS SDK
 This strategy buys when fast EMA crosses above slow EMA
 and sells when fast EMA crosses below slow EMA.
 """
 
-from openalgo import api
+from tradeos import api
 import time
 
 # Configuration
@@ -46,9 +46,9 @@ QUANTITY = 1
 FAST_EMA = 9
 SLOW_EMA = 21
 
-# Initialize OpenAlgo client
+# Initialize TradeOS client
 client = api(
-    api_key="YOUR_OPENALGO_API_KEY",
+    api_key="YOUR_TRADEOS_API_KEY",
     host="http://127.0.0.1:5000"
 )
 
@@ -175,13 +175,13 @@ export default function PythonStrategyGuide() {
             <div className="flex gap-4">
               <Badge className="h-6 w-6 rounded-full flex items-center justify-center shrink-0">1</Badge>
               <div>
-                <p className="font-medium">Install OpenAlgo SDK</p>
+                <p className="font-medium">Install TradeOS SDK</p>
                 <div className="mt-1 flex items-center gap-2">
-                  <code className="bg-muted px-2 py-1 rounded text-sm">pip install openalgo</code>
+                  <code className="bg-muted px-2 py-1 rounded text-sm">pip install tradeos</code>
                   <Button
                     variant="ghost"
                     size="sm"
-                    onClick={() => copyToClipboard('pip install openalgo')}
+                    onClick={() => copyToClipboard('pip install tradeos')}
                   >
                     <Copy className="h-3 w-3" />
                   </Button>
@@ -194,7 +194,7 @@ export default function PythonStrategyGuide() {
                 <p className="font-medium">Get your API Key</p>
                 <p className="text-sm text-muted-foreground">
                   Go to <Link to="/apikey" className="text-primary hover:underline">API Key</Link> page
-                  and copy your OpenAlgo API key
+                  and copy your TradeOS API key
                 </p>
               </div>
             </div>
@@ -203,7 +203,7 @@ export default function PythonStrategyGuide() {
               <div>
                 <p className="font-medium">Write your strategy</p>
                 <p className="text-sm text-muted-foreground">
-                  Create a Python file (.py) with your trading logic using the OpenAlgo SDK
+                  Create a Python file (.py) with your trading logic using the TradeOS SDK
                 </p>
               </div>
             </div>
@@ -518,7 +518,7 @@ export default function PythonStrategyGuide() {
                           The easiest approach:
                         </p>
                         <ul className="list-disc list-inside ml-2 mt-1 text-muted-foreground">
-                          <li>Login to OpenAlgo before the special session</li>
+                          <li>Login to TradeOS before the special session</li>
                           <li>Wait for master contracts to download</li>
                           <li>Click <Play className="h-3 w-3 inline" /> Start on your strategy</li>
                           <li>Click Stop when session ends</li>
@@ -549,7 +549,7 @@ export default function PythonStrategyGuide() {
               </AccordionTrigger>
               <AccordionContent className="text-muted-foreground space-y-3">
                 <p>
-                  OpenAlgo is aware of market timings and handles non-trading periods intelligently:
+                  TradeOS is aware of market timings and handles non-trading periods intelligently:
                 </p>
                 <div className="bg-muted p-3 rounded-lg mt-2 space-y-2 text-sm">
                   <div className="flex items-center gap-2">
@@ -604,7 +604,7 @@ export default function PythonStrategyGuide() {
                 </p>
                 <p>Master contracts are automatically downloaded when you:</p>
                 <ol className="list-decimal list-inside space-y-1 ml-2">
-                  <li>Log in to OpenAlgo</li>
+                  <li>Log in to TradeOS</li>
                   <li>Wait for the download to complete (shown in header)</li>
                 </ol>
                 <p className="text-sm">
@@ -622,7 +622,7 @@ export default function PythonStrategyGuide() {
               </AccordionTrigger>
               <AccordionContent className="text-muted-foreground space-y-2">
                 <p>
-                  Yes, to prevent buggy strategies from crashing OpenAlgo, the following
+                  Yes, to prevent buggy strategies from crashing TradeOS, the following
                   limits are enforced (Linux/Mac only):
                 </p>
                 <div className="grid grid-cols-2 gap-2 mt-2 text-sm">
@@ -650,11 +650,11 @@ export default function PythonStrategyGuide() {
               <AccordionTrigger>
                 <span className="flex items-center gap-2">
                   <Play className="h-4 w-4" />
-                  What happens if I restart OpenAlgo?
+                  What happens if I restart TradeOS?
                 </span>
               </AccordionTrigger>
               <AccordionContent className="text-muted-foreground space-y-3">
-                <p>OpenAlgo handles restarts gracefully with automatic cleanup:</p>
+                <p>TradeOS handles restarts gracefully with automatic cleanup:</p>
                 <ul className="list-disc list-inside space-y-1 ml-2">
                   <li>Strategy configurations are saved to disk and persist</li>
                   <li>Schedules are automatically re-created for all strategies</li>
@@ -665,7 +665,7 @@ export default function PythonStrategyGuide() {
                 <div className="bg-muted p-3 rounded-lg space-y-2">
                   <p className="font-medium">Automatic Status Cleanup</p>
                   <ul className="list-disc list-inside space-y-1 ml-2 text-sm">
-                    <li>If OpenAlgo restarts while a strategy was running, the status is reset to "stopped"</li>
+                    <li>If TradeOS restarts while a strategy was running, the status is reset to "stopped"</li>
                     <li>This prevents stale "Running" indicators for dead processes</li>
                     <li>The strategy will resume at the next scheduled start time</li>
                   </ul>
@@ -760,50 +760,50 @@ export default function PythonStrategyGuide() {
                 <p>
                   If your strategy requires additional Python libraries (e.g., <code>talib</code>,
                   <code>pandas-ta</code>, <code>numpy</code>), you need to install them in
-                  OpenAlgo's Python virtual environment.
+                  TradeOS's Python virtual environment.
                 </p>
 
                 <div className="bg-primary/10 border border-primary/20 p-4 rounded-lg space-y-4">
                   <div>
                     <p className="font-semibold text-primary mb-2">Method 1: Using UV (Recommended)</p>
                     <p className="text-sm mb-2">
-                      If you installed OpenAlgo using the UV method:
+                      If you installed TradeOS using the UV method:
                     </p>
                     <ol className="list-decimal list-inside space-y-2 ml-2 text-sm">
                       <li>
-                        Open <code className="bg-muted px-1 rounded">openalgo/pyproject.toml</code>
+                        Open <code className="bg-muted px-1 rounded">tradeos/pyproject.toml</code>
                       </li>
                       <li>
                         Add your library to the <code>dependencies</code> section:
                         <pre className="bg-muted p-2 rounded mt-1 text-xs overflow-x-auto">
 {`[project]
 dependencies = [
-    "openalgo",
+    "tradeos",
     "TA-Lib",        # Add your library here
     "pandas-ta",
 ]`}
                         </pre>
                       </li>
                       <li>
-                        Run <code className="bg-muted px-1 rounded">uv sync</code> in the openalgo directory
+                        Run <code className="bg-muted px-1 rounded">uv sync</code> in the tradeos directory
                       </li>
-                      <li>Restart OpenAlgo</li>
+                      <li>Restart TradeOS</li>
                     </ol>
                   </div>
 
                   <div className="border-t border-primary/20 pt-4">
                     <p className="font-semibold text-primary mb-2">Method 2: Using Regular Python venv</p>
                     <p className="text-sm mb-2">
-                      If you installed OpenAlgo using a regular Python virtual environment:
+                      If you installed TradeOS using a regular Python virtual environment:
                     </p>
                     <ol className="list-decimal list-inside space-y-2 ml-2 text-sm">
                       <li>
-                        Open <code className="bg-muted px-1 rounded">openalgo/requirements.txt</code>
+                        Open <code className="bg-muted px-1 rounded">tradeos/requirements.txt</code>
                       </li>
                       <li>
                         Add your library:
                         <pre className="bg-muted p-2 rounded mt-1 text-xs overflow-x-auto">
-{`openalgo
+{`tradeos
 TA-Lib
 pandas-ta`}
                         </pre>
@@ -815,7 +815,7 @@ pandas-ta`}
 pip install -r requirements.txt`}
                         </pre>
                       </li>
-                      <li>Restart OpenAlgo</li>
+                      <li>Restart TradeOS</li>
                     </ol>
                   </div>
                 </div>
@@ -839,12 +839,12 @@ pip install -r requirements.txt`}
         </CardContent>
       </Card>
 
-      {/* OpenAlgo SDK Reference */}
+      {/* TradeOS SDK Reference */}
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Code className="h-5 w-5" />
-            OpenAlgo SDK Quick Reference
+            TradeOS SDK Quick Reference
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -873,12 +873,12 @@ pip install -r requirements.txt`}
           <p className="text-sm text-muted-foreground">
             For complete SDK documentation, visit:{' '}
             <a
-              href="https://docs.openalgo.in"
+              href="https://docs.tradeos.io"
               target="_blank"
               rel="noopener noreferrer"
               className="text-primary hover:underline"
             >
-              docs.openalgo.in
+              docs.tradeos.io
             </a>
           </p>
         </CardContent>

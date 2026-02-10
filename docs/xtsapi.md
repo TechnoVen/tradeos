@@ -1,6 +1,6 @@
-# ⚙️ How to Integrate Any XTS API-Supported Broker in OpenAlgo (5-Minute Setup)
+# ⚙️ How to Integrate Any XTS API-Supported Broker in TradeOS (5-Minute Setup)
 
-OpenAlgo already supports XTS API through the `compositedge` plugin. Any broker using XTS (like IIFL, Nirmal Bang, Anand Rathi, Jainam, 5paisa, etc.) can be added with **zero code duplication**—just a few config updates.
+TradeOS already supports XTS API through the `compositedge` plugin. Any broker using XTS (like IIFL, Nirmal Bang, Anand Rathi, Jainam, 5paisa, etc.) can be added with **zero code duplication**—just a few config updates.
 
 ---
 
@@ -184,8 +184,8 @@ broker/compositedge/
 │   └── master_contract_db.py   # Download & store broker's symbol master
 │
 └── mapping/
-    ├── order_data.py           # OpenAlgo → XTS order translation
-    └── transform_data.py       # XTS → OpenAlgo data formatting
+    ├── order_data.py           # TradeOS → XTS order translation
+    └── transform_data.py       # XTS → TradeOS data formatting
 ```
 
 ---
@@ -195,11 +195,11 @@ broker/compositedge/
 ```json
 {
   "Plugin Name": "compositedge",
-  "Plugin URI": "https://openalgo.in",
-  "Description": "CompositedgeOpenAlgo Plugin",
+  "Plugin URI": "https://tradeos.io",
+  "Description": "CompositedgeTradeOS Plugin",
   "Version": "1.0",
   "Author": "Kalaivani",
-  "Author URI": "https://openalgo.in"
+  "Author URI": "https://tradeos.io"
 }
 ```
 
@@ -221,6 +221,6 @@ broker/compositedge/
 
 ## 🚀 Conclusion
 
-Thanks to OpenAlgo’s modular and broker-agnostic design:
+Thanks to TradeOS’s modular and broker-agnostic design:
 
 > 💡 You can integrate **any XTS broker in under 5 minutes** by changing only `baseurl.py`, `.env`, and a few UI/backend hooks.

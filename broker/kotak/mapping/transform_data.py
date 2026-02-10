@@ -1,4 +1,4 @@
-# Mapping OpenAlgo API Request https://openalgo.in/docs
+# Mapping TradeOS API Request https://tradeos.io/docs
 # Mapping Angel Broking Parameters https://smartapi.angelbroking.com/docs/Orders
 
 from database.token_db import get_br_symbol
@@ -82,7 +82,7 @@ def map_variety(pricetype):
 
 def map_exchange(brexchange):
     """
-    Maps the Broker Exchange to the OpenAlgo Exchange.
+    Maps the Broker Exchange to the TradeOS Exchange.
     """
 
     exchange_mapping = {
@@ -99,7 +99,7 @@ def map_exchange(brexchange):
 
 def reverse_map_exchange(exchange):
     """
-    Maps the Broker Exchange to the OpenAlgo Exchange.
+    Maps the Broker Exchange to the TradeOS Exchange.
     """
 
     exchange_mapping = {
