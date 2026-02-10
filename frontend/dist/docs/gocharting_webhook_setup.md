@@ -532,8 +532,8 @@ If you hit rate limits:
 - GoCharting Help: https://gocharting.com/help
 
 ### Community
-- TradeOS GitHub: https://github.com/marketcalls/tradeos
-- Report Issues: https://github.com/marketcalls/tradeos/issues
+- TradeOS GitHub: https://github.com/TechnoVen/tradeos
+- Report Issues: https://github.com/TechnoVen/tradeos/issues
 
 ### Video Tutorials
 - Check TradeOS YouTube channel for video guides
